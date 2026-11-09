@@ -1,0 +1,10 @@
+# Go build output
+/bin/
+*.exe
+*.test
+*.out
+
+# Secrets (GROQ_API_KEY lives here, never commit it)
+.env
+
+.DS_Store
