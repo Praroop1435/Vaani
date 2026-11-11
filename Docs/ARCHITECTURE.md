@@ -15,7 +15,7 @@ flowchart LR
     subgraph RELAY[Relay server]
         ADM[Admission + queue<br/>deadline per request] --> P1
         P1[1. Understand<br/>LLM: rewrite query] --> P2
-        P2[2. Retrieve<br/>tool: search chunks] --> P3
+        P2[2. Retrieve<br/>tool: BGE semantic top-k<br/>+ 1-hop graph expand] --> P3
         P3{3. Decide}
         P3 -->|weak hits, max 2 tries| P2
         P3 -->|nothing relevant| REF[Refuse:<br/>papers don't say]
@@ -31,7 +31,8 @@ flowchart LR
     MC -->|real| GROQ[(Groq free tier)]
     MC -->|load tests| STUB[(Stand-in model<br/>our HTTP server)]
 
-    LIB[(Paper index<br/>chunks + page/section ids)] --- P2
+    LIB[(Paper index<br/>chunk vectors + page graph)] --- P2
+    EMB[(BGE embedder in-process<br/>BAAI bge-base-en-v1.5 ONNX<br/>weights saved in models/)] --- P2
     OUT & REF --> CSV[results.csv<br/>+ per-request trace]
 ```
 
@@ -39,8 +40,10 @@ flowchart LR
 
 | Component | Job | Notes |
 |---|---|---|
-| **Ingest** (one-off) | Download the 3 PDFs at the exact versions, extract text, split into chunks tagged `paper / section / page` | Chunk size is a knob, so we can compare 3 retrieval settings |
-| **Paper index** | In-memory BM25 search over chunks | No embeddings API, so retrieval spends zero model budget |
+| **Ingest** (one-off) | 3 PDFs at exact versions (`data/papers/`, 120 pages), `pdftotext` per page, split into chunks tagged `paper / section / page`, embed each chunk with BGE | Chunk size is a knob, so we can compare 3 retrieval settings |
+| **Embedder** | BAAI's official `bge-base-en-v1.5` ONNX weights from Hugging Face (110M params, 768-dim), saved once in `models/` and run inside the Go process with `hugot` + ONNX Runtime | Zero Groq budget, no extra server, no runtime download. [CLS] pooling as BGE was trained (hugot defaults to mean pooling, which would be wrong). Max 512 tokens: longer text is an error, never cut. Queries get BGE's "Represent this sentence for searching relevant passages: " prefix. Matches Ollama's independent conversion at cosine 0.99999 |
+| **Paper index** | Chunk vectors in memory, brute-force cosine top-k | ~2K vectors: a vector DB would add a service for no speed gain |
+| **Page graph** | Nodes = chunks. Edges: next/prev in the same section, section → parent section, and explicit refs ("Table 3", "Figure 2", "Section 4.1", "Eq. 5", "Appendix B") → the chunk that holds that caption or heading, same paper only | Built with regex at ingest, no LLM. Used to pull in a cited table or the rest of a split paragraph after top-k |
 | **Admission + queue** | Bounded queue; each request has a give-up deadline; drop or shed when the queue is full | Goroutine worker pool sized from the measured "requests in flight" limit |
 | **Pipeline** | The 5 steps above; one loop (re-retrieve) and one branch (refuse) | Step 5 is a plain code check, not an LLM call, so verifying costs no tokens |
 | **Limit governor** | Token buckets for RPM and TPM, plus a daily counter; updated from Groq's `x-ratelimit-*` headers | Decides: wait, use a cheaper path (fewer chunks, skip step 1), or refuse |
@@ -52,6 +55,22 @@ flowchart LR
 ## The one decision that shapes everything
 
 **The daily request budget is the scarcest thing, so every request spends at most 2 model calls** (understand + draft). Retrieval and citation checking are plain code. When the budget runs low we drop step 1 first, then shrink retrieved context, then refuse new requests with an honest "out of budget, try at X" reply, never a guessed answer.
+
+## Retrieval settings to compare (Table 3)
+
+| Setting | Chunk | Top-k | Graph expand | Purpose |
+|---|---|---|---|---|
+| A | ~300 tokens | 4 | no | Cheap baseline |
+| B | ~480 tokens (bge-base max is 512) | 3 | no | More context per hit, more tokens |
+| C | ~300 tokens | 4 | yes, 1 hop, re-ranked by cosine, token cap | Small chunks plus the table/figure/neighbour they point to |
+
+**Not building an LLM-made knowledge graph (GraphRAG style).** Building it would send all 120 pages through Groq: roughly 120K+ tokens against a 200K daily budget, before answering a single question.
+
+## How to run
+
+One-time setup: `brew install onnxruntime`, then `go run -tags ORT ./cmd/getmodel` (saves the weights to `models/`, skips if already there).
+
+Tests: `go test -tags ORT ./test -v`. Add `GROQ_LIVE=1` to also spend one real Groq request.
 
 ## Repo layout (planned)
 

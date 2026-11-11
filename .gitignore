@@ -8,3 +8,12 @@
 .env
 
 .DS_Store
+
+# Papers are fetched from arXiv by ingest, not committed
+/data/papers/
+
+# Model weights downloaded from Hugging Face by cmd/getmodel
+/models/
+
+# LaTeX sources fetched from arXiv by ingest (for tables)
+/data/latex/

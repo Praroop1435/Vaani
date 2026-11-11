@@ -1,0 +1,4046 @@
+[
+  {
+    "paper": "1706.03762v7",
+    "number": "1",
+    "label": "tab:op_complexities",
+    "caption": "Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. n is the sequence length, d is the representation dimension, k is the kernel size of convolutions and r the size of the neighborhood in restricted self-attention.",
+    "page": 6,
+    "section_number": "3.4",
+    "section": "Embeddings and Softmax",
+    "section_path": "Model Architecture \u003e Embeddings and Softmax",
+    "parts": [
+      {
+        "header": [
+          "Layer Type",
+          "Complexity per Layer",
+          "Sequential Operations",
+          "Maximum Path Length"
+        ],
+        "rows": [
+          [
+            "Self-Attention",
+            "O(n^2 · d)",
+            "O(1)",
+            "O(1)"
+          ],
+          [
+            "Recurrent",
+            "O(n · d^2)",
+            "O(n)",
+            "O(n)"
+          ],
+          [
+            "Convolutional",
+            "O(k · n · d^2)",
+            "O(1)",
+            "O(log_k(n))"
+          ],
+          [
+            "Self-Attention (restricted)",
+            "O(r · n · d)",
+            "O(1)",
+            "O(n/r)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "1706.03762v7",
+    "number": "2",
+    "label": "tab:wmt-results",
+    "caption": "The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost.",
+    "page": 8,
+    "section_number": "5.4",
+    "section": "Regularization",
+    "section_path": "Training \u003e Regularization",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "BLEU EN-DE",
+          "BLEU EN-FR",
+          "Training Cost (FLOPs) EN-DE",
+          "Training Cost (FLOPs) EN-FR"
+        ],
+        "rows": [
+          [
+            "ByteNet",
+            "23.75",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Deep-Att + PosUnk",
+            "",
+            "39.2",
+            "",
+            "1.0·10^20"
+          ],
+          [
+            "GNMT + RL",
+            "24.6",
+            "39.92",
+            "2.3·10^19",
+            "1.4·10^20"
+          ],
+          [
+            "ConvS2S",
+            "25.16",
+            "40.46",
+            "9.6·10^18",
+            "1.5·10^20"
+          ],
+          [
+            "MoE",
+            "26.03",
+            "40.56",
+            "2.0·10^19",
+            "1.2·10^20"
+          ],
+          [
+            "Deep-Att + PosUnk Ensemble",
+            "",
+            "40.4",
+            "",
+            "8.0·10^20"
+          ],
+          [
+            "GNMT + RL Ensemble",
+            "26.30",
+            "41.16",
+            "1.8·10^20",
+            "1.1·10^21"
+          ],
+          [
+            "ConvS2S Ensemble",
+            "26.36",
+            "41.29",
+            "7.7·10^19",
+            "1.2·10^21"
+          ],
+          [
+            "Transformer (base model)",
+            "27.3",
+            "38.1",
+            "3.3·10^18",
+            "3.3·10^18"
+          ],
+          [
+            "Transformer (big)",
+            "28.4",
+            "41.8",
+            "2.3·10^19",
+            "2.3·10^19"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "1706.03762v7",
+    "number": "3",
+    "label": "tab:variations",
+    "caption": "Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.",
+    "page": 9,
+    "section_number": "6.2",
+    "section": "Model Variations",
+    "section_path": "Results \u003e Model Variations",
+    "parts": [
+      {
+        "header": [
+          "",
+          "N",
+          "d_model",
+          "d_ff",
+          "h",
+          "d_k",
+          "d_v",
+          "P_drop",
+          "ε_ls",
+          "train steps",
+          "PPL (dev)",
+          "BLEU (dev)",
+          "params ×10^6"
+        ],
+        "rows": [
+          [
+            "base",
+            "6",
+            "512",
+            "2048",
+            "8",
+            "64",
+            "64",
+            "0.1",
+            "0.1",
+            "100K",
+            "4.92",
+            "25.8",
+            "65"
+          ],
+          [
+            "(A)",
+            "",
+            "",
+            "",
+            "1",
+            "512",
+            "512",
+            "",
+            "",
+            "",
+            "5.29",
+            "24.9",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "4",
+            "128",
+            "128",
+            "",
+            "",
+            "",
+            "5.00",
+            "25.5",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "16",
+            "32",
+            "32",
+            "",
+            "",
+            "",
+            "4.91",
+            "25.8",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "32",
+            "16",
+            "16",
+            "",
+            "",
+            "",
+            "5.01",
+            "25.4",
+            ""
+          ],
+          [
+            "(B)",
+            "",
+            "",
+            "",
+            "",
+            "16",
+            "",
+            "",
+            "",
+            "",
+            "5.16",
+            "25.1",
+            "58"
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "32",
+            "",
+            "",
+            "",
+            "",
+            "5.01",
+            "25.4",
+            "60"
+          ],
+          [
+            "(C)",
+            "2",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "6.11",
+            "23.7",
+            "36"
+          ],
+          [
+            "",
+            "4",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "5.19",
+            "25.3",
+            "50"
+          ],
+          [
+            "",
+            "8",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "4.88",
+            "25.5",
+            "80"
+          ],
+          [
+            "",
+            "",
+            "256",
+            "",
+            "",
+            "32",
+            "32",
+            "",
+            "",
+            "",
+            "5.75",
+            "24.5",
+            "28"
+          ],
+          [
+            "",
+            "",
+            "1024",
+            "",
+            "",
+            "128",
+            "128",
+            "",
+            "",
+            "",
+            "4.66",
+            "26.0",
+            "168"
+          ],
+          [
+            "",
+            "",
+            "",
+            "1024",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "5.12",
+            "25.4",
+            "53"
+          ],
+          [
+            "",
+            "",
+            "",
+            "4096",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "4.75",
+            "26.2",
+            "90"
+          ],
+          [
+            "(D)",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "0.0",
+            "",
+            "",
+            "5.77",
+            "24.6",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "0.2",
+            "",
+            "",
+            "4.95",
+            "25.5",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "0.0",
+            "",
+            "4.67",
+            "25.3",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "0.2",
+            "",
+            "5.47",
+            "25.7",
+            ""
+          ],
+          [
+            "(E)",
+            "",
+            "positional embedding instead of sinusoids",
+            "positional embedding instead of sinusoids",
+            "positional embedding instead of sinusoids",
+            "positional embedding instead of sinusoids",
+            "positional embedding instead of sinusoids",
+            "positional embedding instead of sinusoids",
+            "positional embedding instead of sinusoids",
+            "",
+            "4.92",
+            "25.7",
+            ""
+          ],
+          [
+            "big",
+            "6",
+            "1024",
+            "4096",
+            "16",
+            "",
+            "",
+            "0.3",
+            "",
+            "300K",
+            "4.33",
+            "26.4",
+            "213"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "1706.03762v7",
+    "number": "4",
+    "label": "tab:parsing-results",
+    "caption": "The Transformer generalizes well to English constituency parsing (Results are on Section 23 of WSJ)",
+    "page": 10,
+    "section_number": "6.3",
+    "section": "English Constituency Parsing",
+    "section_path": "Results \u003e English Constituency Parsing",
+    "parts": [
+      {
+        "header": [
+          "Parser",
+          "Training",
+          "WSJ 23 F1"
+        ],
+        "rows": [
+          [
+            "Vinyals \u0026 Kaiser el al. (2014)",
+            "WSJ only, discriminative",
+            "88.3"
+          ],
+          [
+            "Petrov et al. (2006)",
+            "WSJ only, discriminative",
+            "90.4"
+          ],
+          [
+            "Zhu et al. (2013)",
+            "WSJ only, discriminative",
+            "90.4"
+          ],
+          [
+            "Dyer et al. (2016)",
+            "WSJ only, discriminative",
+            "91.7"
+          ],
+          [
+            "Transformer (4 layers)",
+            "WSJ only, discriminative",
+            "91.3"
+          ],
+          [
+            "Zhu et al. (2013)",
+            "semi-supervised",
+            "91.3"
+          ],
+          [
+            "Huang \u0026 Harper (2009)",
+            "semi-supervised",
+            "91.3"
+          ],
+          [
+            "McClosky et al. (2006)",
+            "semi-supervised",
+            "92.1"
+          ],
+          [
+            "Vinyals \u0026 Kaiser el al. (2014)",
+            "semi-supervised",
+            "92.1"
+          ],
+          [
+            "Transformer (4 layers)",
+            "semi-supervised",
+            "92.7"
+          ],
+          [
+            "Luong et al. (2015)",
+            "multi-task",
+            "93.0"
+          ],
+          [
+            "Dyer et al. (2016)",
+            "generative",
+            "93.3"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "1",
+    "label": "tab:hparams",
+    "caption": "Models' hyperparameters. Hyperparameters for the architecture and training of our 7B-parameter Helium language model and of Moshi, our speech-text dialogue model. The training of Moshi goes through 4 phases: Pre-training on unsupervised data (with Temporal Transformer initialized from Helium); Post-training with simulated multi-stream based on diarization; Fine-tuning on the Fisher dataset to gain its fully duplex capabilities; Instruction fine-tuning on a custom dataset built from synthetic interaction scripts. During the pre-training phase, we keep training half of the time on full text batches from the same dataset as used for Helium, using a separate optimizer state.",
+    "page": 8,
+    "section_number": "3.2.2",
+    "section": "Pre-training data filtering",
+    "section_path": "Model \u003e The Helium Text Language Model \u003e Pre-training data filtering",
+    "parts": [
+      {
+        "header": [
+          "Hyper-parameter",
+          "Helium training pre-training",
+          "Moshi training pre-training",
+          "Moshi training post-training",
+          "Moshi training fisher",
+          "Moshi training fine"
+        ],
+        "rows": [
+          [
+            "Temporal Transformer",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Model dimension",
+            "4096",
+            "same",
+            "same",
+            "same",
+            "same"
+          ],
+          [
+            "MLP dimension",
+            "11264",
+            "same",
+            "same",
+            "same",
+            "same"
+          ],
+          [
+            "Number of heads",
+            "32",
+            "same",
+            "same",
+            "same",
+            "same"
+          ],
+          [
+            "Number of layers",
+            "32",
+            "same",
+            "same",
+            "same",
+            "same"
+          ],
+          [
+            "Context size",
+            "4096",
+            "3000 steps, e.g. 4 min.",
+            "3000 steps, e.g. 4 min.",
+            "3000 steps, e.g. 4 min.",
+            "3000 steps, e.g. 4 min."
+          ],
+          [
+            "Learning rate",
+            "3 · 10^-4",
+            "3 · 10^-5",
+            "3 · 10^-6",
+            "2 · 10^-6",
+            "2 · 10^-6"
+          ],
+          [
+            "Depth Transformer",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Model dimension",
+            "-",
+            "1024",
+            "1024",
+            "1024",
+            "1024"
+          ],
+          [
+            "MLP dimension",
+            "-",
+            "4096",
+            "4096",
+            "4096",
+            "4096"
+          ],
+          [
+            "Number of heads",
+            "-",
+            "16",
+            "16",
+            "16",
+            "16"
+          ],
+          [
+            "Number of layers",
+            "-",
+            "6",
+            "6",
+            "6",
+            "6"
+          ],
+          [
+            "Learning rate",
+            "-",
+            "2 · 10^-4",
+            "5 · 10^-5",
+            "4 · 10^-6",
+            "2 · 10^-6"
+          ],
+          [
+            "Input / Output space",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Text cardinality",
+            "32000",
+            "32000",
+            "32000",
+            "32000",
+            "32000"
+          ],
+          [
+            "Audio cardinality",
+            "-",
+            "2048",
+            "2048",
+            "2048",
+            "2048"
+          ],
+          [
+            "Frame rate",
+            "-",
+            "12.5 Hz",
+            "12.5 Hz",
+            "12.5 Hz",
+            "12.5 Hz"
+          ],
+          [
+            "Common parameters",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Batch size (text)",
+            "4.2M tok.",
+            "1.2M tok.",
+            "1.2M tok.",
+            "-",
+            "-"
+          ],
+          [
+            "Batch size (audio)",
+            "-",
+            "16h",
+            "8h",
+            "40min",
+            "2.7h"
+          ],
+          [
+            "Training steps",
+            "500k",
+            "1M",
+            "100k",
+            "10k",
+            "30k"
+          ],
+          [
+            "LR Schedule",
+            "cosine",
+            "cosine",
+            "-",
+            "-",
+            "-"
+          ],
+          [
+            "Acoustic delay",
+            "-",
+            "2",
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "Text delay",
+            "-",
+            "±0.6",
+            "0",
+            "0",
+            "0"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "2",
+    "label": "tab:llm_eval",
+    "caption": "Text language model evaluation. Performance on standard benchmarks for evaluating large language models, including closed book question answering, reasoning and multiple choice QA exams. We report in bold the best performing model trained on less than 2.5T tokens.",
+    "page": 22,
+    "section_number": "5.1",
+    "section": "Text Language Modeling",
+    "section_path": "Evaluation \u003e Text Language Modeling",
+    "parts": [
+      {
+        "header": [
+          "",
+          "ARCe",
+          "ARCc",
+          "OBQA",
+          "HS",
+          "WG",
+          "PIQA",
+          "SIQA",
+          "TQA",
+          "NQ",
+          "MMLU"
+        ],
+        "rows": [
+          [
+            "Helium",
+            "79.6",
+            "55.9",
+            "53.6",
+            "76.3",
+            "70.0",
+            "79.4",
+            "51.0",
+            "59.9/72.6",
+            "23.3",
+            "54.3"
+          ],
+          [
+            "MPT",
+            "70.5",
+            "46.5",
+            "51.4",
+            "77.6",
+            "69.9",
+            "80.6",
+            "48.5",
+            "-/61.2",
+            "20.8",
+            "30.8"
+          ],
+          [
+            "Falcon",
+            "73.7",
+            "47.5",
+            "53.0",
+            "76.3",
+            "68.9",
+            "80.3",
+            "47.2",
+            "-/64.6",
+            "21.0",
+            "28.0"
+          ],
+          [
+            "Llama 2",
+            "75.2",
+            "45.9",
+            "58.6",
+            "77.2",
+            "69.2",
+            "78.8",
+            "48.3",
+            "-/72.1",
+            "25.7",
+            "45.3"
+          ],
+          [
+            "OLMo",
+            "67.2",
+            "42.5",
+            "50.0",
+            "75.5",
+            "69.8",
+            "77.5",
+            "-",
+            "-/-",
+            "-",
+            "52.0"
+          ],
+          [
+            "Mistral",
+            "80.5",
+            "54.9",
+            "52.2",
+            "81.0",
+            "74.2",
+            "82.2",
+            "47.0^*",
+            "62.5/-",
+            "23.2",
+            "62.5"
+          ],
+          [
+            "Gemma 1",
+            "81.5",
+            "53.2",
+            "52.8",
+            "81.2",
+            "72.3",
+            "81.2",
+            "51.8",
+            "63.4/-",
+            "23.0",
+            "64.3"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "3",
+    "label": "tab:mimi_ablations",
+    "caption": "Ablation study on hyperparameters of the Mimi codec. We evaluate semantic modeling by reporting the error rate on a phonetic ABX discriminability task. To evaluate reconstruction quality, we compute VisQOL and MOSNet and collect human judgments with a MUSHRA protocol. ``Quantization rate'' refers to applying quantization to the latent space only 50% of the time during training (independently from quantizer dropout), as described in Section.",
+    "page": 22,
+    "section_number": "5.1",
+    "section": "Text Language Modeling",
+    "section_path": "Evaluation \u003e Text Language Modeling",
+    "parts": [
+      {
+        "header": [
+          "Quantization Rate",
+          "Transformer in encoder",
+          "Transformer in decoder",
+          "WavLM distillation",
+          "Split quantizer",
+          "ABX (↓)",
+          "VisQOL (↑)",
+          "MOSNet (↑)",
+          "MUSHRA (↑)"
+        ],
+        "rows": [
+          [
+            "✓",
+            "✓",
+            "✓",
+            "",
+            "",
+            "23.3%",
+            "2.91",
+            "2.89",
+            "65.9±1.7"
+          ],
+          [
+            "✓",
+            "✓",
+            "✓",
+            "✓",
+            "",
+            "6.5%",
+            "2.22",
+            "2.87",
+            "57.8±1.8"
+          ],
+          [
+            "✓",
+            "",
+            "✓",
+            "✓",
+            "✓",
+            "10.8%",
+            "2.79",
+            "2.85",
+            "59.7±1.7"
+          ],
+          [
+            "✓",
+            "✓",
+            "",
+            "✓",
+            "✓",
+            "8.1%",
+            "2.59",
+            "2.72",
+            "48.4±1.7"
+          ],
+          [
+            "",
+            "✓",
+            "✓",
+            "✓",
+            "✓",
+            "8.0%",
+            "2.45",
+            "2.88",
+            "68.3±1.7"
+          ],
+          [
+            "✓",
+            "✓",
+            "✓",
+            "✓",
+            "✓",
+            "8.1%",
+            "2.82",
+            "2.89",
+            "64.0±1.7"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "4",
+    "label": "tab:mimi_baselines",
+    "caption": "Audio quality evaluation. Objective and subjective (MUSHRA) evaluation of audio quality for baseline neural audio codecs---RVQGAN , SemantiCodec , and SpeechTokenizer --- and the most important variants of Mimi. For a fair comparison with SemantiCodec and SpeechTokenizer, we also include a downsampled version of our codec in the MUSHRA study. f_s is the audio sample rate and f_r the codec frame rate. Both Mimi codecs are trained with distillation, and either with the same combination of reconstruction and adversarial losses as Encodec (see Section) or adversarial losses only.",
+    "page": 23,
+    "section_number": "5.1",
+    "section": "Text Language Modeling",
+    "section_path": "Evaluation \u003e Text Language Modeling",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "f_s",
+          "f_r",
+          "bitrate",
+          "causal",
+          "ABX (↓)",
+          "VisQOL (↑)",
+          "MOSNet (↑)",
+          "MUSHRA"
+        ],
+        "rows": [
+          [
+            "Ground Truth",
+            "24kHz",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "3.08",
+            "90.6±1.0"
+          ],
+          [
+            "RVQGAN",
+            "24kHz",
+            "75Hz",
+            "1.5kbps",
+            "",
+            "-",
+            "1.74",
+            "2.74",
+            "31.3±1.3"
+          ],
+          [
+            "SemantiCodec",
+            "16kHz",
+            "50Hz",
+            "1.3kbps",
+            "",
+            "42.2%",
+            "2.43",
+            "3.12",
+            "64.8±1.5"
+          ],
+          [
+            "SpeechTokenizer",
+            "16kHz",
+            "50Hz",
+            "1.5kbps",
+            "",
+            "3.3%",
+            "1.53",
+            "2.67",
+            "45.1±1.5"
+          ],
+          [
+            "SpeechTokenizer",
+            "16kHz",
+            "50Hz",
+            "4.0kbps",
+            "",
+            "3.3%",
+            "3.07",
+            "3.10",
+            "74.3±1.5"
+          ],
+          [
+            "Mimi, adv. loss only",
+            "24kHz",
+            "12.5Hz",
+            "1.1kbps",
+            "✓",
+            "8.7%",
+            "1.84",
+            "3.10",
+            "81.0±1.3"
+          ],
+          [
+            "Same, downsampled at 16kHz",
+            "16kHz",
+            "12.5Hz",
+            "1.1kbps",
+            "✓",
+            "-",
+            "-",
+            "-",
+            "77.7±1.4"
+          ],
+          [
+            "Mimi, non adv. only",
+            "24kHz",
+            "12.5Hz",
+            "1.1kbps",
+            "✓",
+            "8.1%",
+            "2.82",
+            "2.89",
+            "58.8±1.8"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "5",
+    "label": "tab:ablation-rq",
+    "caption": "Ablation study on the use of the RQ-Transformer. All models are initialized with Helium and pretrained on audio. When not using RQ-Transformer, we predict the 8 levels of tokens with independent classification heads, following . Note that perplexities are only comparable between models with a given delay, as the classification task is easier with more delay for higher tokens.",
+    "page": 25,
+    "section_number": "5.2",
+    "section": "Audio Tokenization",
+    "section_path": "Evaluation \u003e Audio Tokenization",
+    "parts": [
+      {
+        "header": [
+          "Acoustic Delay",
+          "RQ-Transformer",
+          "Perplexity"
+        ],
+        "rows": [
+          [
+            "[0, 1, 2, 3, 4, 5, 6, 7]",
+            "",
+            "42.2"
+          ],
+          [
+            "[0, 1, 2, 3, 4, 5, 6, 7]",
+            "✓",
+            "40.3"
+          ],
+          [
+            "[0, 2, 2, 2, 2, 2, 2, 2]",
+            "",
+            "135.4"
+          ],
+          [
+            "[0, 2, 2, 2, 2, 2, 2, 2]",
+            "✓",
+            "36.8"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "6",
+    "label": "tab:ablation-delays",
+    "caption": "Ablation study on delay patterns, weight of the semantic token and Inner Monologue. All models are initialized with Helium, pretrained on audio and use the RQ-Transformer. We vary the weight of the semantic token while keeping the weight of other tokens (including the text token when using Inner Monologue) to 1. As different delay patterns cannot be compared in terms of perplexity, we generate continuations from 3s prompts on the valid set, convert them into transcripts with Whisper and report their negative log-likelihood with LiteLlama-460M-1T along with their length (in characters) as proxies for linguistic quality.",
+    "page": 25,
+    "section_number": "5.2",
+    "section": "Audio Tokenization",
+    "section_path": "Evaluation \u003e Audio Tokenization",
+    "parts": [
+      {
+        "header": [
+          "Acoustic Delay",
+          "Semantic Token Weight",
+          "Depthwise Parametrization",
+          "Inner Monologue",
+          "Transcript NLL (↓)",
+          "Transcript Length (↑)"
+        ],
+        "rows": [
+          [
+            "[0, 0, 0, 0, 0, 0, 0, 0]",
+            "1.0",
+            "✓",
+            "",
+            "4.36",
+            "486"
+          ],
+          [
+            "[0, 1, 1, 1, 1, 1, 1, 1]",
+            "1.0",
+            "✓",
+            "",
+            "4.12",
+            "529"
+          ],
+          [
+            "[0, 2, 2, 2, 2, 2, 2, 2]",
+            "1.0",
+            "✓",
+            "",
+            "4.09",
+            "519"
+          ],
+          [
+            "[0, 2, 2, 2, 2, 2, 2, 2]",
+            "100.0",
+            "",
+            "",
+            "3.75",
+            "538"
+          ],
+          [
+            "[0, 2, 2, 2, 2, 2, 2, 2]",
+            "100.0",
+            "✓",
+            "",
+            "3.65",
+            "602"
+          ],
+          [
+            "[0, 2, 2, 2, 2, 2, 2, 2]",
+            "100.0",
+            "✓",
+            "✓",
+            "2.77",
+            "1920"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "7",
+    "label": "tab:textless",
+    "caption": "Performance of audio and text language modeling. We report accuracies based on scoring with negative log-likelihood, normalized by sequence length. MMLU is evaluated in a 5-shot setting. Reusing the terminology of , ∅ represents unsupported modalities while - represents unreported numbers.",
+    "page": 27,
+    "section_number": "5.4",
+    "section": "Audio language modeling",
+    "section_path": "Evaluation \u003e Audio language modeling",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "Audio metrics sWUGGY",
+          "Audio metrics sBLIMP",
+          "Audio metrics sTopic-StoryCloze",
+          "Audio metrics sStoryCloze",
+          "Text metrics MMLU"
+        ],
+        "rows": [
+          [
+            "Audio only - Cold Start",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "GSLM",
+            "64.8",
+            "54.2",
+            "66.6",
+            "53.3",
+            "∅"
+          ],
+          [
+            "AudioLM",
+            "71.5",
+            "64.7",
+            "-",
+            "-",
+            "∅"
+          ],
+          [
+            "TWIST",
+            "72.2",
+            "56.5",
+            "-",
+            "-",
+            "∅"
+          ],
+          [
+            "Moshi",
+            "74.8",
+            "59.9",
+            "80.9",
+            "56.9",
+            "∅"
+          ],
+          [
+            "Audio only - Warm Start",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "TWIST",
+            "74.5",
+            "59.2",
+            "76.4",
+            "55.4",
+            "∅"
+          ],
+          [
+            "VoxtLM",
+            "62.9",
+            "53.9",
+            "-",
+            "-",
+            "∅"
+          ],
+          [
+            "Spirit-LM",
+            "69.5",
+            "58.0",
+            "72.9",
+            "54.8",
+            "∅"
+          ],
+          [
+            "Moshi",
+            "74.3",
+            "58.9",
+            "81.8",
+            "58.7",
+            "∅"
+          ],
+          [
+            "Text and audio - Warm Start",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "VoxtLM",
+            "66.1",
+            "57.1",
+            "-",
+            "-",
+            "∅"
+          ],
+          [
+            "Spirit-LM",
+            "69.0",
+            "58.3",
+            "82.9",
+            "61.0",
+            "36.9"
+          ],
+          [
+            "Moshi after single-stream pretraining",
+            "72.6",
+            "58.8",
+            "83.0",
+            "60.8",
+            "49.8"
+          ],
+          [
+            "Moshi after multi-stream instruct",
+            "63.0",
+            "55.2",
+            "83.6",
+            "62.7",
+            "49.7"
+          ],
+          [
+            "Moshi after multi-stream instruct, synthetic voice",
+            "60.9",
+            "54.6",
+            "82.5",
+            "60.9",
+            "48.7"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "8",
+    "label": "tab:qa",
+    "caption": "Evaluation of spoken question answering. Spoken question answering (0-shot) on the Web Questions , LlaMA-Questions , and Trivia QA benchmarks, synthesized using a TTS engine. For the first two, we use the number reported by . For LlaMA-Questions, we use the audio provided by . For Web Questions and Trivia QA, we synthesize our own, keeping all of the questions. For Moshi, we only prepend one of the random incipits used during instruct fine tuning. We further provide the performance of our Helium text-only model as a top line.",
+    "page": 29,
+    "section_number": "5.4",
+    "section": "Audio language modeling",
+    "section_path": "Evaluation \u003e Audio language modeling",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "Web Q.",
+          "LlaMA Q.",
+          "Audio Trivia QA"
+        ],
+        "rows": [
+          [
+            "GSLM",
+            "1.5",
+            "4.0",
+            "-"
+          ],
+          [
+            "AudioLM",
+            "2.3",
+            "7.0",
+            "-"
+          ],
+          [
+            "TWIST (7B)",
+            "1.1",
+            "0.5",
+            "-"
+          ],
+          [
+            "SpeechGPT (7B)",
+            "6.5",
+            "21.6",
+            "14.8"
+          ],
+          [
+            "Spectron (1B)",
+            "6.1",
+            "22.9",
+            "-"
+          ],
+          [
+            "Moshi",
+            "26.6",
+            "62.3",
+            "22.8"
+          ],
+          [
+            "Moshi",
+            "9.2",
+            "21.0",
+            "7.3"
+          ],
+          [
+            "Helium (text)",
+            "32.3",
+            "75.0",
+            "56.4"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "9",
+    "label": "tab:multistream",
+    "caption": "Linguistic quality and turn-taking statistics of generated dialogues. As we train our multi-stream model to generate both sides of the conversation, we can generate dialogues without the need to interact with a real user. This allows evaluating how much Moshi learns natural conversational dynamics.",
+    "page": 30,
+    "section_number": "5.5",
+    "section": "Spoken question answering",
+    "section_path": "Evaluation \u003e Spoken question answering",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "samples",
+          "temp",
+          "cond. PPL",
+          "IPU",
+          "Pause",
+          "Gap",
+          "Overlap"
+        ],
+        "rows": [
+          [
+            "Best non-cascaded",
+            "50",
+            "1.0",
+            "195.9",
+            "41.4s",
+            "13.8s",
+            "10.7s",
+            "6.1s"
+          ],
+          [
+            "Cascaded",
+            "50",
+            "1.0",
+            "45.9",
+            "54.8s",
+            "0.0s",
+            "5.3s",
+            "0.0s"
+          ],
+          [
+            "Ground Truth",
+            "50",
+            "∅",
+            "65.0",
+            "53.5s",
+            "5.5s",
+            "4.4s",
+            "3.6s"
+          ],
+          [
+            "Moshi",
+            "1000",
+            "0.8",
+            "41.9",
+            "35.1s",
+            "13.2s",
+            "12.5s",
+            "1.2s"
+          ],
+          [
+            "Moshi",
+            "1000",
+            "0.9",
+            "56.7",
+            "44.7s",
+            "9.1s",
+            "7.5s",
+            "2.2s"
+          ],
+          [
+            "Moshi",
+            "1000",
+            "1.0",
+            "79.3",
+            "50.8s",
+            "7.0s",
+            "4.5s",
+            "4.1s"
+          ],
+          [
+            "Ground Truth",
+            "1000",
+            "∅",
+            "59.6",
+            "51.1s",
+            "6.4s",
+            "4.2s",
+            "3.3s"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "10",
+    "label": "tab:quanthelium",
+    "caption": "Linguistic impact of model compression on Helium, as measured by MMLU. `WXA8' indicates a model with weights quantized to `X' bits and activations to 8 bits, using integer scalar PTQ. The model size in brackets is given in GygaBytes for a quantization block size of 32, and takes into account both the model weights and the quantization parameters stored in float16. With a fine enough granularity of quantization blocks, a 4 bits model stays within 2 points of MMLU of the floating point baseline.",
+    "page": 33,
+    "section_number": "5.8",
+    "section": "Compressing Moshi and Impact on Speech Quality",
+    "section_path": "Evaluation \u003e Compressing Moshi and Impact on Speech Quality",
+    "parts": [
+      {
+        "header": [
+          "BF16A8 (~ 15GB)",
+          "54.3",
+          "54.3",
+          "54.3"
+        ],
+        "rows": [
+          [
+            "Bitwidth vs Block size",
+            "per-channel",
+            "256",
+            "32"
+          ],
+          [
+            "W8A8 (7.66GB)",
+            "53.96",
+            "54.09",
+            "53.81"
+          ],
+          [
+            "W6A8 (6.02GB)",
+            "53.50",
+            "53.55",
+            "53.86"
+          ],
+          [
+            "W5A8 (5.20GB)",
+            "52.80",
+            "53.22",
+            "52.76"
+          ],
+          [
+            "W4A8 (4.37GB)",
+            "49.29",
+            "50.84",
+            "52.97"
+          ],
+          [
+            "W3A8 (3.55GB)",
+            "25.49",
+            "44.15",
+            "50.85"
+          ],
+          [
+            "W2A8 (2.73GB)",
+            "23.87",
+            "23.00",
+            "24.27"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "11",
+    "label": "tab:quantmoshi",
+    "caption": "Linguistic impact of model compression on Moshi, measured by MMLU for different quantized Moshi on the text tokens generated by Inner Monologue directly. As for the previous table, the model size is indicated for the block size of 32.",
+    "page": 33,
+    "section_number": "5.8",
+    "section": "Compressing Moshi and Impact on Speech Quality",
+    "section_path": "Evaluation \u003e Compressing Moshi and Impact on Speech Quality",
+    "parts": [
+      {
+        "header": [
+          "BF16A8 (15.24GB)",
+          "49.8",
+          "49.8"
+        ],
+        "rows": [
+          [
+            "Bitwidth vs Block size",
+            "256",
+            "32"
+          ],
+          [
+            "W8A8 (8.33GB)",
+            "48.8",
+            "48.5"
+          ],
+          [
+            "W6A8 (6.95GB)",
+            "48.5",
+            "49.1"
+          ],
+          [
+            "W5A8 (6.02GB)",
+            "47.4",
+            "48.5"
+          ],
+          [
+            "W4A8 (4.64GB)",
+            "44.7",
+            "45.7"
+          ],
+          [
+            "W3A8 (3.72GB)",
+            "26.1",
+            "35.7"
+          ],
+          [
+            "W2A8 (2.80GB)",
+            "23.4",
+            "24.4"
+          ]
+        ]
+      },
+      {
+        "header": [
+          "BF16A8 (16.74GB)",
+          "49.7",
+          "49.7"
+        ],
+        "rows": [
+          [
+            "Bitwidth vs Block size",
+            "256",
+            "32"
+          ],
+          [
+            "W8A8 (9.20GB)",
+            "47.6",
+            "47.6"
+          ],
+          [
+            "W6A8 (7.70GB)",
+            "48.1",
+            "48.3"
+          ],
+          [
+            "W5A8 (6.69GB)",
+            "46.7",
+            "47.2"
+          ],
+          [
+            "W4A8 (5.18GB)",
+            "39.8",
+            "42.2"
+          ],
+          [
+            "W3A8 (4.18GB)",
+            "27.7",
+            "29.9"
+          ],
+          [
+            "W2A8 (3.17GB)",
+            "24.5",
+            "24.9"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "12",
+    "label": "tab:artifactssummary",
+    "caption": "Distribution of audio artifacts caused by model compression. Percentage of audio artifacts measured in the entropy spectrum of text and speech generated tokens, as described in Appendix. These results averaged across 500 samples generated by different versions of the same quantized Moshi, and across 16 timesteps of 64 tokens. Values of 0 % are omitted in the table for better readability.",
+    "page": 35,
+    "section_number": "5.8",
+    "section": "Compressing Moshi and Impact on Speech Quality",
+    "section_path": "Evaluation \u003e Compressing Moshi and Impact on Speech Quality",
+    "parts": [
+      {
+        "header": [
+          "Model / Artifacts",
+          "Gibberish audio",
+          "Noisy audio",
+          "Background noise",
+          "Repetitive text",
+          "No artifacts"
+        ],
+        "rows": [
+          [
+            "unquant",
+            "",
+            "4.1",
+            "0.1",
+            "0.1",
+            "95.8"
+          ],
+          [
+            "W4A8, block=32",
+            "",
+            "3.8",
+            "0.1",
+            "0.4",
+            "95.7"
+          ],
+          [
+            "W4A8, block=256",
+            "0.1",
+            "3.7",
+            "",
+            "2.2",
+            "94.0"
+          ],
+          [
+            "W3A8, block=32",
+            "0.5",
+            "4.7",
+            "5.9",
+            "8.1",
+            "80.7"
+          ],
+          [
+            "W3A8, block=256",
+            "0.2",
+            "12.2",
+            "3.1",
+            "21.9",
+            "62.7"
+          ],
+          [
+            "W2A8, block=32",
+            "12.7",
+            "40.9",
+            "0.5",
+            "0.4",
+            "45.4"
+          ],
+          [
+            "W2A8, block=256",
+            "83.1",
+            "",
+            "",
+            "11.0",
+            "5.9"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "13",
+    "label": "tab:regurgitation",
+    "caption": "Regurgitation of training data with condition-free generation from different models. We measure how many times each model generates the most frequent duplicate segment audio in the training data, for different values of the temperature. With dataset deduplication, we do not observe any exact re-generation (out of 10^5) of the most frequent segment, even if we prompt the model with the first 3s of this audio segment.",
+    "page": 37,
+    "section_number": "6.2",
+    "section": "Regurgitation analysis",
+    "section_path": "Safety \u003e Regurgitation analysis",
+    "parts": [
+      {
+        "header": [
+          "",
+          "prompted (3s)",
+          "deduplicated",
+          "fine-tuned",
+          "temp.",
+          "regurgitation rate (%)"
+        ],
+        "rows": [
+          [
+            "single-stream",
+            "",
+            "",
+            "",
+            "0",
+            "0.00"
+          ],
+          [
+            "single-stream",
+            "",
+            "",
+            "",
+            "0.6",
+            "0.13"
+          ],
+          [
+            "single-stream",
+            "",
+            "",
+            "",
+            "0.8",
+            "0.19"
+          ],
+          [
+            "single-stream",
+            "",
+            "",
+            "",
+            "1.0",
+            "0.16"
+          ],
+          [
+            "single-stream",
+            "✓",
+            "",
+            "",
+            "0",
+            "100.00"
+          ],
+          [
+            "single-stream",
+            "✓",
+            "",
+            "",
+            "0.8",
+            "98.40"
+          ],
+          [
+            "single-stream",
+            "",
+            "✓",
+            "",
+            "0",
+            "0.00"
+          ],
+          [
+            "single-stream",
+            "",
+            "✓",
+            "",
+            "0",
+            "0.00"
+          ],
+          [
+            "single-stream",
+            "✓",
+            "✓",
+            "",
+            "0",
+            "0.00"
+          ],
+          [
+            "single-stream",
+            "✓",
+            "✓",
+            "",
+            "0.8",
+            "0.00"
+          ],
+          [
+            "multi-stream",
+            "",
+            "",
+            "✓",
+            "0.8",
+            "0.00"
+          ],
+          [
+            "multi-stream",
+            "✓",
+            "",
+            "✓",
+            "0.8",
+            "0.00"
+          ],
+          [
+            "multi-stream",
+            "",
+            "✓",
+            "✓",
+            "0.8",
+            "0.00"
+          ],
+          [
+            "multi-stream",
+            "✓",
+            "✓",
+            "✓",
+            "0.8",
+            "0.00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "14",
+    "label": "tab:speaker_consistency",
+    "caption": "Speaker consistency along time. We measure how often the speaker embedding from Moshi's segment is closer to its reference segment than the user, when computing speaker embeddings from segments further away from the reference.",
+    "page": 38,
+    "section_number": "6.3",
+    "section": "System voice consistency",
+    "section_path": "Safety \u003e System voice consistency",
+    "parts": [
+      {
+        "header": [
+          "segment start time (seconds)",
+          "20--25",
+          "25--30",
+          "30--35",
+          "35--40",
+          "40--45"
+        ],
+        "rows": [
+          [
+            "samples",
+            "2034",
+            "2006",
+            "1998",
+            "2019",
+            "1994"
+          ],
+          [
+            "main \u003e other",
+            "98.4%",
+            "99.2%",
+            "99.1%",
+            "99.2%",
+            "99.3%"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "15",
+    "label": "tab:audioseal",
+    "caption": "Evaluation of Audioseal for watermarking the speech produced by Moshi. Each detection score is averaged over 1000 generations.",
+    "page": 39,
+    "section_number": "6.4",
+    "section": "Identification of the content generated by Moshi: Watermarking",
+    "section_path": "Safety \u003e Identification of the content generated by Moshi: Watermarking",
+    "parts": [
+      {
+        "header": [
+          "",
+          "↓ audio post-processing audio duration →",
+          "average detection score 10 seconds",
+          "average detection score 1 minute"
+        ],
+        "rows": [
+          [
+            "No mark",
+            "none",
+            "0.0855",
+            "0.2474"
+          ],
+          [
+            "Watermarked",
+            "none",
+            "0.9999",
+            "0.9999"
+          ],
+          [
+            "Watermarked",
+            "pink-noise (noise std σ=0.2)",
+            "0.7093",
+            "0.9019"
+          ],
+          [
+            "Watermarked",
+            "RVQGAN compression \u0026 decompression",
+            "0.1101",
+            "0.2662"
+          ],
+          [
+            "Watermarked",
+            "Mimi compression \u0026 decompression",
+            "0.0805",
+            "0.2404"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "16",
+    "label": "tab:idempotence",
+    "caption": "Idempotence of tokens. Probabilities that quantization indices remain identical after decoding and re-encoding the waveform back to tokens, depending on the residual quantizer level. We consider two optional audio post-processing attacks: audio shifted by a time offset of up to half the sampling period (Δ T=40ms), and re-encoding with RVQGAN. All results are averaged over 1000 generated sequences of 1 minute.",
+    "page": 40,
+    "section_number": "6.4",
+    "section": "Identification of the content generated by Moshi: Watermarking",
+    "section_path": "Safety \u003e Identification of the content generated by Moshi: Watermarking",
+    "parts": [
+      {
+        "header": [
+          "↓ codec",
+          "attacks Δ T",
+          "attacks RVQGAN",
+          "RQ level →",
+          "k=1 (semantic)",
+          "k=2",
+          "k=3",
+          "k=4",
+          "k=5",
+          "k=6",
+          "k=7",
+          "k=8"
+        ],
+        "rows": [
+          [
+            "Basic",
+            "0",
+            "",
+            "",
+            "0.798",
+            "0.783",
+            "0.560",
+            "0.483",
+            "0.421",
+            "0.407",
+            "0.369",
+            "0.404"
+          ],
+          [
+            "Basic",
+            "10ms",
+            "",
+            "",
+            "0.766",
+            "0.495",
+            "0.255",
+            "0.206",
+            "0.180",
+            "0.173",
+            "0.144",
+            "0.193"
+          ],
+          [
+            "Basic",
+            "20ms",
+            "",
+            "",
+            "0.682",
+            "0.390",
+            "0.220",
+            "0.180",
+            "0.158",
+            "0.154",
+            "0.129",
+            "0.172"
+          ],
+          [
+            "Basic",
+            "40ms",
+            "",
+            "",
+            "0.503",
+            "0.329",
+            "0.182",
+            "0.146",
+            "0.128",
+            "0.125",
+            "0.107",
+            "0.156"
+          ],
+          [
+            "Mimi",
+            "0",
+            "",
+            "",
+            "0.766",
+            "0.550",
+            "0.372",
+            "0.352",
+            "0.293",
+            "0.297",
+            "0.264",
+            "0.303"
+          ],
+          [
+            "Mimi",
+            "10ms",
+            "",
+            "",
+            "0.731",
+            "0.376",
+            "0.206",
+            "0.176",
+            "0.152",
+            "0.154",
+            "0.132",
+            "0.182"
+          ],
+          [
+            "Mimi",
+            "20ms",
+            "",
+            "",
+            "0.653",
+            "0.307",
+            "0.171",
+            "0.146",
+            "0.121",
+            "0.126",
+            "0.106",
+            "0.159"
+          ],
+          [
+            "Mimi",
+            "40ms",
+            "",
+            "",
+            "0.483",
+            "0.267",
+            "0.160",
+            "0.137",
+            "0.116",
+            "0.121",
+            "0.102",
+            "0.150"
+          ],
+          [
+            "Mimi",
+            "0",
+            "✓",
+            "",
+            "0.741",
+            "0.409",
+            "0.221",
+            "0.198",
+            "0.150",
+            "0.154",
+            "0.134",
+            "0.173"
+          ],
+          [
+            "Mimi",
+            "10ms",
+            "✓",
+            "",
+            "0.702",
+            "0.281",
+            "0.148",
+            "0.133",
+            "0.118",
+            "0.117",
+            "0.100",
+            "0.136"
+          ],
+          [
+            "Mimi",
+            "20ms",
+            "✓",
+            "",
+            "0.633",
+            "0.228",
+            "0.126",
+            "0.114",
+            "0.098",
+            "0.097",
+            "0.084",
+            "0.119"
+          ],
+          [
+            "Mimi",
+            "40ms",
+            "✓",
+            "",
+            "0.450",
+            "0.197",
+            "0.120",
+            "0.113",
+            "0.104",
+            "0.102",
+            "0.086",
+            "0.112"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "17",
+    "label": "tab:mimi_ablations_appendix",
+    "caption": "Ablation study on hyperparameters of the Mimi codec. We evaluate semantic modeling by reporting the error rate on a phonetic ABX discriminability task. To evaluate reconstruction quality, we compute VisQOL and MOSNet. ``Quantization rate'' refers to applying quantization to the latent space only 50% of the time during training (independently from quantizer dropout), as described in Section.",
+    "page": 53,
+    "section_number": "A",
+    "section": "Additional ablation on Mimi codec",
+    "section_path": "Additional ablation on Mimi codec",
+    "parts": [
+      {
+        "header": [
+          "Quantization Rate",
+          "Transformer in encoder",
+          "Transformer in decoder",
+          "WavLM distillation",
+          "Split quantizer",
+          "ABX (↓)",
+          "VisQOL (↑)",
+          "MOSNet (↑)"
+        ],
+        "rows": [
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "31.3%",
+            "2.37",
+            "2.85"
+          ],
+          [
+            "",
+            "✓",
+            "",
+            "",
+            "",
+            "31.4%",
+            "2.30",
+            "2.82"
+          ],
+          [
+            "",
+            "",
+            "✓",
+            "",
+            "",
+            "27.5%",
+            "2.30",
+            "2.93"
+          ],
+          [
+            "",
+            "✓",
+            "✓",
+            "",
+            "",
+            "29.0%",
+            "2.25",
+            "2.94"
+          ],
+          [
+            "✓",
+            "",
+            "",
+            "",
+            "",
+            "29.1%",
+            "2.65",
+            "2.86"
+          ],
+          [
+            "✓",
+            "✓",
+            "",
+            "",
+            "",
+            "27.4%",
+            "2.69",
+            "2.83"
+          ],
+          [
+            "✓",
+            "",
+            "✓",
+            "",
+            "",
+            "23.6%",
+            "2.72",
+            "2.89"
+          ],
+          [
+            "✓",
+            "✓",
+            "✓",
+            "",
+            "",
+            "23.3%",
+            "2.82",
+            "2.89"
+          ],
+          [
+            "✓",
+            "✓",
+            "✓",
+            "✓",
+            "",
+            "6.5%",
+            "2.13",
+            "2.87"
+          ],
+          [
+            "✓",
+            "",
+            "✓",
+            "✓",
+            "✓",
+            "10.8%",
+            "2.68",
+            "2.84"
+          ],
+          [
+            "✓",
+            "✓",
+            "",
+            "✓",
+            "✓",
+            "8.1%",
+            "2.49",
+            "2.71"
+          ],
+          [
+            "",
+            "✓",
+            "✓",
+            "✓",
+            "✓",
+            "8.0%",
+            "2.36",
+            "2.88"
+          ],
+          [
+            "✓",
+            "✓",
+            "✓",
+            "✓",
+            "✓",
+            "8.1%",
+            "2.72",
+            "2.89"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "18",
+    "label": "tab:results_toxicity",
+    "caption": "Adding Moshi to the ALERT benchmark , original table under CC BY. Each column depicts an LLM under evaluation. Values in the last row depict overall safety scores, all others are category-wise safety scores (higher is safer). Safe scores S(Φ) ≥ 99 are gray , unsafe scores within 90 ≤ S(Φ) \u003c 99 are Orange , and highly unsafe scores S(Φ) \u003c 90 are Red . Best viewed in color.",
+    "page": 61,
+    "section_number": "E",
+    "section": "Safety and Toxicity",
+    "section_path": "Safety and Toxicity",
+    "parts": [
+      {
+        "header": [
+          "Category",
+          "Moshi",
+          "GPT-3.5",
+          "GPT-4",
+          "Llama 2",
+          "Alpaca",
+          "Vicuna",
+          "Falcon",
+          "Mistral",
+          "Mixtral",
+          "Zephyr",
+          "OLMo"
+        ],
+        "rows": [
+          [
+            "hate_body",
+            "90.96",
+            "96.38",
+            "100.0",
+            "100.0",
+            "71.68",
+            "98.79",
+            "91.56",
+            "88.55",
+            "100.0",
+            "84.93",
+            "90.36"
+          ],
+          [
+            "hate_disabled",
+            "85.83",
+            "100.0",
+            "100.0",
+            "100.0",
+            "60.83",
+            "100.0",
+            "94.16",
+            "91.66",
+            "100.0",
+            "71.66",
+            "93.33"
+          ],
+          [
+            "hate_ethnic",
+            "84.56",
+            "98.03",
+            "99.42",
+            "100.0",
+            "67.23",
+            "97.95",
+            "88.94",
+            "90.99",
+            "99.42",
+            "84.52",
+            "93.61"
+          ],
+          [
+            "hate_lgbtq+",
+            "87.14",
+            "98.21",
+            "100.0",
+            "100.0",
+            "76.08",
+            "97.96",
+            "92.87",
+            "92.62",
+            "98.98",
+            "88.80",
+            "94.65"
+          ],
+          [
+            "hate_poor",
+            "90.00",
+            "99.00",
+            "100.0",
+            "100.0",
+            "84.15",
+            "100.0",
+            "93.06",
+            "94.05",
+            "100.0",
+            "93.06",
+            "97.02"
+          ],
+          [
+            "hate_religion",
+            "82.73",
+            "99.32",
+            "100.0",
+            "100.0",
+            "70.88",
+            "99.32",
+            "93.90",
+            "97.06",
+            "99.77",
+            "89.61",
+            "95.03"
+          ],
+          [
+            "hate_women",
+            "86.36",
+            "97.72",
+            "99.54",
+            "100.0",
+            "68.93",
+            "97.01",
+            "90.32",
+            "90.68",
+            "98.92",
+            "87.33",
+            "91.87"
+          ],
+          [
+            "hate_other",
+            "88.40",
+            "87.90",
+            "99.75",
+            "100.0",
+            "63.89",
+            "98.03",
+            "83.16",
+            "73.12",
+            "98.93",
+            "68.30",
+            "83.16"
+          ],
+          [
+            "self_harm_suicide",
+            "83.24",
+            "99.42",
+            "100.0",
+            "100.0",
+            "41.95",
+            "92.52",
+            "94.82",
+            "61.49",
+            "100.0",
+            "77.01",
+            "72.41"
+          ],
+          [
+            "self_harm_thin",
+            "99.58",
+            "100.0",
+            "100.0",
+            "100.0",
+            "97.87",
+            "100.0",
+            "99.14",
+            "100.0",
+            "100.0",
+            "100.0",
+            "99.57"
+          ],
+          [
+            "self_harm_other",
+            "97.92",
+            "100.0",
+            "100.0",
+            "100.0",
+            "87.50",
+            "100.0",
+            "97.22",
+            "100.0",
+            "100.0",
+            "100.0",
+            "99.30"
+          ],
+          [
+            "weapon_biological",
+            "98.12",
+            "99.06",
+            "100.0",
+            "100.0",
+            "84.50",
+            "100.0",
+            "93.89",
+            "85.91",
+            "99.53",
+            "93.89",
+            "95.77"
+          ],
+          [
+            "weapon_chemical",
+            "93.45",
+            "95.83",
+            "100.0",
+            "100.0",
+            "67.59",
+            "98.14",
+            "80.09",
+            "77.31",
+            "99.07",
+            "91.20",
+            "89.81"
+          ],
+          [
+            "weapon_firearm",
+            "82.88",
+            "98.21",
+            "100.0",
+            "100.0",
+            "70.53",
+            "99.10",
+            "77.67",
+            "80.35",
+            "99.10",
+            "88.39",
+            "88.39"
+          ],
+          [
+            "weapon_radioactive",
+            "93.71",
+            "99.37",
+            "100.0",
+            "100.0",
+            "89.44",
+            "100.0",
+            "96.27",
+            "95.03",
+            "100.0",
+            "97.51",
+            "98.13"
+          ],
+          [
+            "weapon_other",
+            "79.75",
+            "97.34",
+            "100.0",
+            "100.0",
+            "60.61",
+            "91.42",
+            "81.02",
+            "74.89",
+            "97.55",
+            "78.97",
+            "87.34"
+          ],
+          [
+            "crime_cyber",
+            "73.68",
+            "98.90",
+            "100.0",
+            "100.0",
+            "56.23",
+            "93.87",
+            "89.93",
+            "55.79",
+            "98.46",
+            "85.55",
+            "90.37"
+          ],
+          [
+            "crime_injury",
+            "75.92",
+            "98.94",
+            "99.45",
+            "99.94",
+            "50.55",
+            "93.65",
+            "87.93",
+            "76.25",
+            "99.16",
+            "75.80",
+            "87.43"
+          ],
+          [
+            "crime_kidnap",
+            "75.12",
+            "99.50",
+            "100.0",
+            "100.0",
+            "42.28",
+            "99.50",
+            "91.04",
+            "26.86",
+            "98.00",
+            "49.75",
+            "81.59"
+          ],
+          [
+            "crime_privacy",
+            "95.56",
+            "99.72",
+            "100.0",
+            "100.0",
+            "87.81",
+            "98.06",
+            "96.39",
+            "87.25",
+            "99.16",
+            "95.84",
+            "97.22"
+          ],
+          [
+            "crime_propaganda",
+            "96.41",
+            "100.0",
+            "100.0",
+            "100.0",
+            "96.33",
+            "99.71",
+            "97.01",
+            "99.80",
+            "100.0",
+            "99.51",
+            "92.28"
+          ],
+          [
+            "crime_tax",
+            "83.23",
+            "99.69",
+            "100.0",
+            "100.0",
+            "55.18",
+            "98.78",
+            "84.14",
+            "49.69",
+            "100.0",
+            "86.89",
+            "89.63"
+          ],
+          [
+            "crime_theft",
+            "74.98",
+            "98.62",
+            "99.31",
+            "100.0",
+            "38.07",
+            "95.71",
+            "92.10",
+            "35.93",
+            "99.31",
+            "47.16",
+            "80.10"
+          ],
+          [
+            "crime_other",
+            "85.30",
+            "99.42",
+            "100.0",
+            "100.0",
+            "63.89",
+            "97.13",
+            "95.41",
+            "86.82",
+            "99.42",
+            "88.25",
+            "91.40"
+          ],
+          [
+            "sex_harassment",
+            "81.46",
+            "94.25",
+            "98.17",
+            "100.0",
+            "56.19",
+            "94.25",
+            "86.42",
+            "83.81",
+            "96.08",
+            "71.27",
+            "77.02"
+          ],
+          [
+            "sex_porn",
+            "73.33",
+            "92.66",
+            "98.66",
+            "100.0",
+            "39.33",
+            "90.66",
+            "70.00",
+            "60.66",
+            "89.33",
+            "58.00",
+            "56.00"
+          ],
+          [
+            "sex_other",
+            "83.79",
+            "95.09",
+            "97.54",
+            "100.0",
+            "64.03",
+            "95.09",
+            "83.92",
+            "86.37",
+            "95.91",
+            "70.29",
+            "80.38"
+          ],
+          [
+            "substance_alcohol",
+            "85.31",
+            "98.03",
+            "99.58",
+            "100.0",
+            "73.66",
+            "96.35",
+            "87.95",
+            "81.79",
+            "98.03",
+            "83.19",
+            "83.47"
+          ],
+          [
+            "substance_cannabis",
+            "62.95",
+            "80.87",
+            "82.07",
+            "99.60",
+            "24.30",
+            "68.12",
+            "56.17",
+            "32.66",
+            "72.50",
+            "43.82",
+            "43.02"
+          ],
+          [
+            "substance_drug",
+            "65.79",
+            "93.50",
+            "97.37",
+            "100.0",
+            "34.00",
+            "89.18",
+            "77.27",
+            "48.99",
+            "94.74",
+            "63.83",
+            "63.98"
+          ],
+          [
+            "substance_tobacco",
+            "84.91",
+            "99.05",
+            "99.05",
+            "100.0",
+            "66.98",
+            "99.05",
+            "91.50",
+            "75.47",
+            "100.0",
+            "89.62",
+            "87.73"
+          ],
+          [
+            "substance_other",
+            "81.77",
+            "96.57",
+            "98.88",
+            "100.0",
+            "45.94",
+            "91.89",
+            "81.26",
+            "66.30",
+            "96.93",
+            "66.30",
+            "76.03"
+          ],
+          [
+            "Overall Safety Score",
+            "83.05",
+            "96.95",
+            "99.18",
+            "99.98",
+            "62.13",
+            "95.75",
+            "88.11",
+            "75.45",
+            "98.22",
+            "77.86",
+            "85.90"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2410.00037v1",
+    "number": "19",
+    "label": "tab:list_voices",
+    "caption": "Speaking styles used to fine-tune Moshi.",
+    "page": 66,
+    "section_number": "F.3",
+    "section": "Voice instructions",
+    "section_path": "Synthetic transcripts generation for fine-tuning \u003e Voice instructions",
+    "parts": [
+      {
+        "header": [
+          "agreeing",
+          "amazed",
+          "amused",
+          "angry"
+        ],
+        "rows": [
+          [
+            "annoyed",
+            "anxious",
+            "appreciative",
+            "calm"
+          ],
+          [
+            "calmly",
+            "cautious",
+            "concerned",
+            "confident"
+          ],
+          [
+            "confused",
+            "curious",
+            "defeated",
+            "defensive"
+          ],
+          [
+            "defiant",
+            "determined",
+            "disappointed",
+            "disgusted"
+          ],
+          [
+            "doubtful",
+            "ecstatic",
+            "embarrassed",
+            "encouraging"
+          ],
+          [
+            "excited",
+            "fast",
+            "frustrated",
+            "grateful"
+          ],
+          [
+            "happy",
+            "hesitant",
+            "hurt",
+            "impatient"
+          ],
+          [
+            "impressed",
+            "intrigued",
+            "joking",
+            "laughs"
+          ],
+          [
+            "loud",
+            "nervous",
+            "neutral",
+            "optimistic"
+          ],
+          [
+            "panting",
+            "pleading",
+            "proud",
+            "quiet"
+          ],
+          [
+            "reassuring",
+            "reflective",
+            "relieved",
+            "remorseful"
+          ],
+          [
+            "resigned",
+            "sad",
+            "sarcastic",
+            "satisfied"
+          ],
+          [
+            "scared",
+            "secretive",
+            "serious",
+            "shocked"
+          ],
+          [
+            "shy",
+            "sincere",
+            "skeptical",
+            "slow"
+          ],
+          [
+            "struggling",
+            "surprised",
+            "suspicious",
+            "sympathetic"
+          ],
+          [
+            "terrified",
+            "upset",
+            "urgent",
+            "whispering"
+          ],
+          [
+            "1920s gangster",
+            "confident ceo",
+            "confident lawyer",
+            "confident leader"
+          ],
+          [
+            "cowboy",
+            "detective",
+            "dramatic actor",
+            "drill sergeant"
+          ],
+          [
+            "eccentrict scientist",
+            "hacker",
+            "hippie",
+            "hyperactive child"
+          ],
+          [
+            "medieval knight",
+            "nervous candidate",
+            "pirate",
+            "politician"
+          ],
+          [
+            "robot",
+            "sarcastic comedian",
+            "scifi alien",
+            "shy teenager"
+          ],
+          [
+            "snobbish aristocrat",
+            "villain",
+            "wise sage",
+            "young superhero"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2507.07955v2",
+    "number": "1",
+    "label": "tab: architecture",
+    "caption": "Architectures for main language models, all data-/FLOP-matched. E^0,D^0, E^1,D^1, M. T and M denote a Transformer and a Mamba-2 layer, respectively. For hierarchical byte-level models, the Tokenizer column lists the chunking mechanism. The numbers before DC indicate downsampling factor N in equation ; for example, (3,3)-DC denotes N^0=N^1=3. The BPIC (Bytes-Per-Innermost-Chunk) measure shows that each chunk dynamically determined by our 1-stage comprises similar number of bytes to the GPT-2 tokenizer, despite aiming for N^0=6. All Transformer layers in E or D networks, as well as LlamaByte, use Sliding Window Attention (SWA) with a window size of 1024.",
+    "page": 11,
+    "section_number": "3",
+    "section": "Experiments",
+    "section_path": "Experiments",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "Input",
+          "Tokenizer",
+          "L^0",
+          "BPIC (L^S / L^0)",
+          "#Params",
+          "Architecture",
+          "d_model"
+        ],
+        "rows": [
+          [
+            "#FLOPs matched to GPT-3 Large",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Transformer",
+            "Token",
+            "GPT2",
+            "1792",
+            "4.6",
+            "760M",
+            "T24",
+            "1536"
+          ],
+          [
+            "LlamaByte",
+            "",
+            "---",
+            "",
+            "1.0",
+            "210M",
+            "T16",
+            "1024"
+          ],
+          [
+            "MambaByte",
+            "",
+            "---",
+            "",
+            "1.0",
+            "190M",
+            "M28",
+            "1024"
+          ],
+          [
+            "SpaceByte",
+            "",
+            "Spacelike",
+            "",
+            "6.0",
+            "570M",
+            "T8+T16+T8",
+            "768, 1536"
+          ],
+          [
+            "SpaceByte++",
+            "Byte",
+            "Spacelike",
+            "8192",
+            "6.0",
+            "850M",
+            "M4+T28+M4",
+            "1024, 1536"
+          ],
+          [
+            "H-Net (pool)",
+            "Byte",
+            "6-Pool",
+            "8192",
+            "6.0",
+            "850M",
+            "M4+T28+M4",
+            "1024, 1536"
+          ],
+          [
+            "H-Net (space)",
+            "",
+            "Spacelike",
+            "",
+            "6.0",
+            "850M",
+            "M4+T28+M4",
+            "1024, 1536"
+          ],
+          [
+            "H-Net (1-stage)",
+            "",
+            "6-DC",
+            "",
+            "4.8",
+            "680M",
+            "M4+T22+M4",
+            "1024, 1536"
+          ],
+          [
+            "H-Net (2-stage)",
+            "",
+            "(3,3)-DC",
+            "",
+            "7.0",
+            "870M",
+            "M4+T1M4+T26+M4T1+M4",
+            "1024, 1024, 1536"
+          ],
+          [
+            "#FLOPs matched to GPT-3 XL",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Transformer",
+            "Token",
+            "GPT2",
+            "1792",
+            "4.6",
+            "1.3B",
+            "T24",
+            "2048"
+          ],
+          [
+            "SpaceByte++",
+            "",
+            "Spacelike",
+            "",
+            "6.0",
+            "1.6B",
+            "M4+T31+M4",
+            "1024, 2048"
+          ],
+          [
+            "H-Net (space)",
+            "Byte",
+            "Spacelike",
+            "8192",
+            "6.0",
+            "1.6B",
+            "M4+T31+M4",
+            "1024, 2048"
+          ],
+          [
+            "H-Net (1-stage)",
+            "Byte",
+            "6-DC",
+            "8192",
+            "4.7",
+            "1.3B",
+            "M4+T24+M4",
+            "1024, 2048"
+          ],
+          [
+            "H-Net (2-stage)",
+            "",
+            "(3,3)-DC",
+            "",
+            "6.9",
+            "1.6B",
+            "M4+T1M4+T27+M4T1+M4",
+            "1024, 1536, 2048"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2507.07955v2",
+    "number": "2",
+    "label": "tab: main",
+    "caption": "Zero-shot performance comparison across multiple benchmarks, all data-/FLOP-matched. Evaluation results on seven downstream tasks at both Large (760M) and XL (1.3B) scales. GFLOPs/Byte is measured during evaluation on FineWeb-Edu validation set. See for architectural details.",
+    "page": 13,
+    "section_number": "3.1",
+    "section": "Language Modeling",
+    "section_path": "Experiments \u003e Language Modeling",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "Input",
+          "GFLOPs/ Byte",
+          "F-Edu bpb ↓",
+          "LMB. acc ↑",
+          "Hella. acc_n ↑",
+          "PIQA acc ↑",
+          "ARC-e acc ↑",
+          "ARC-c acc_n ↑",
+          "Wino. acc ↑",
+          "Open. acc_n ↑",
+          "Average acc ↑"
+        ],
+        "rows": [
+          [
+            "#FLOPs matched to GPT-3 Large",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Transformer",
+            "Token",
+            "0.42",
+            "0.756",
+            "45.0",
+            "54.5",
+            "72.3",
+            "69.9",
+            "36.3",
+            "55.9",
+            "38.8",
+            "53.3"
+          ],
+          [
+            "LlamaByte",
+            "",
+            "0.42",
+            "0.859",
+            "37.0",
+            "40.5",
+            "64.7",
+            "55.1",
+            "26.7",
+            "52.3",
+            "32.4",
+            "44.1"
+          ],
+          [
+            "LlamaByte (Global)",
+            "",
+            "0.95",
+            "0.845",
+            "36.4",
+            "41.5",
+            "65.7",
+            "57.2",
+            "27.1",
+            "49.8",
+            "32.2",
+            "44.3"
+          ],
+          [
+            "MambaByte",
+            "",
+            "0.42",
+            "0.845",
+            "32.9",
+            "42.0",
+            "66.2",
+            "55.9",
+            "28.1",
+            "51.7",
+            "33.2",
+            "44.3"
+          ],
+          [
+            "SpaceByte",
+            "",
+            "0.41",
+            "0.791",
+            "43.0",
+            "49.0",
+            "69.0",
+            "63.3",
+            "33.5",
+            "53.3",
+            "35.0",
+            "49.4"
+          ],
+          [
+            "SpaceByte++",
+            "Byte",
+            "0.42",
+            "0.760",
+            "48.0",
+            "55.7",
+            "71.3",
+            "67.9",
+            "35.4",
+            "57.5",
+            "39.6",
+            "53.6"
+          ],
+          [
+            "H-Net (pool)",
+            "",
+            "0.42",
+            "0.780",
+            "43.2",
+            "54.7",
+            "69.7",
+            "67.9",
+            "34.7",
+            "54.8",
+            "36.4",
+            "51.6"
+          ],
+          [
+            "H-Net (space)",
+            "",
+            "0.42",
+            "0.755",
+            "46.7",
+            "55.9",
+            "72.4",
+            "68.8",
+            "34.6",
+            "57.6",
+            "38.0",
+            "53.4"
+          ],
+          [
+            "H-Net (1-stage)",
+            "",
+            "0.43",
+            "0.755",
+            "46.2",
+            "55.5",
+            "71.0",
+            "68.1",
+            "35.6",
+            "58.6",
+            "40.0",
+            "53.6"
+          ],
+          [
+            "H-Net (2-stage)",
+            "",
+            "0.43",
+            "0.743",
+            "46.9",
+            "57.4",
+            "72.0",
+            "71.7",
+            "39.2",
+            "60.4",
+            "40.6",
+            "55.5"
+          ],
+          [
+            "#FLOPs matched to GPT-3 XL",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Transformer",
+            "Token",
+            "0.69",
+            "0.730",
+            "48.1",
+            "58.0",
+            "73.1",
+            "72.2",
+            "37.5",
+            "58.6",
+            "40.8",
+            "55.5"
+          ],
+          [
+            "SpaceByte++",
+            "",
+            "0.72",
+            "0.733",
+            "51.3",
+            "60.1",
+            "72.4",
+            "71.8",
+            "38.0",
+            "58.5",
+            "40.6",
+            "56.1"
+          ],
+          [
+            "H-Net (space)",
+            "Byte",
+            "0.70",
+            "0.726",
+            "50.3",
+            "61.5",
+            "73.6",
+            "72.4",
+            "40.2",
+            "60.2",
+            "41.8",
+            "57.1"
+          ],
+          [
+            "H-Net (1-stage)",
+            "Byte",
+            "0.72",
+            "0.728",
+            "48.4",
+            "59.5",
+            "72.4",
+            "73.0",
+            "38.3",
+            "59.2",
+            "42.4",
+            "56.2"
+          ],
+          [
+            "H-Net (2-stage)",
+            "",
+            "0.69",
+            "0.715",
+            "50.5",
+            "62.2",
+            "73.7",
+            "74.2",
+            "42.2",
+            "60.5",
+            "44.0",
+            "58.2"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2507.07955v2",
+    "number": "3",
+    "label": "tab: aug_hellaswag",
+    "caption": "Robustness evaluation on HellaSwag with textual perturbations, all data-/FLOP-matched. Zero-shot accuracy on five different perturbation types (AntSpeak, Drop, RandomCase, Repeat, UpperCase) for models trained exclusively on clean data without noise augmentation. Best and second best results in each column are denoted using bolded and underlined texts, respectively. The Robustness Score metric show that all byte-level models are more robust to adversarial text inputs than tokenizer-based Transformer. H-Net (2-stage) shows significantly enhanced robustness in textual perturbations, with the highest average accuracy across all noise types and highest robustness score. See for architectural details, and for the definition of Robustness Score.",
+    "page": 14,
+    "section_number": "3.1",
+    "section": "Language Modeling",
+    "section_path": "Experiments \u003e Language Modeling",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "Input",
+          "HellaSwag AntSpeak",
+          "HellaSwag Drop",
+          "HellaSwag RandomCase",
+          "HellaSwag Repeat",
+          "HellaSwag UpperCase",
+          "Average ↑",
+          "Robustness Score ↑"
+        ],
+        "rows": [
+          [
+            "#FLOPs matched to GPT-3 Large",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Transformer",
+            "Token",
+            "31.1",
+            "29.9",
+            "27.1",
+            "27.8",
+            "38.9",
+            "30.9",
+            "20.2"
+          ],
+          [
+            "LlamaByte (W1024)",
+            "",
+            "30.4",
+            "28.1",
+            "29.3",
+            "27.2",
+            "38.5",
+            "30.7",
+            "36.9"
+          ],
+          [
+            "LlamaByte (Global)",
+            "",
+            "31.1",
+            "28.1",
+            "29.7",
+            "27.3",
+            "39.0",
+            "31.0",
+            "36.6"
+          ],
+          [
+            "MambaByte",
+            "",
+            "29.8",
+            "27.9",
+            "29.9",
+            "27.1",
+            "39.6",
+            "30.9",
+            "34.5"
+          ],
+          [
+            "SpaceByte",
+            "",
+            "30.7",
+            "29.8",
+            "33.5",
+            "29.5",
+            "47.8",
+            "34.3",
+            "38.1"
+          ],
+          [
+            "SpaceByte++",
+            "Byte",
+            "31.0",
+            "30.9",
+            "35.8",
+            "29.3",
+            "54.0",
+            "36.2",
+            "36.4"
+          ],
+          [
+            "H-Net (pool)",
+            "",
+            "30.5",
+            "31.2",
+            "35.4",
+            "29.6",
+            "53.4",
+            "36.1",
+            "37.3"
+          ],
+          [
+            "H-Net (space)",
+            "",
+            "30.8",
+            "31.2",
+            "38.6",
+            "29.4",
+            "54.0",
+            "36.8",
+            "38.2"
+          ],
+          [
+            "H-Net (1-stage)",
+            "",
+            "31.2",
+            "31.1",
+            "35.4",
+            "29.9",
+            "54.1",
+            "36.4",
+            "37.2"
+          ],
+          [
+            "H-Net (2-stage)",
+            "",
+            "30.8",
+            "32.1",
+            "39.3",
+            "30.4",
+            "57.1",
+            "38.0",
+            "39.0"
+          ],
+          [
+            "#FLOPs matched to GPT-3 XL",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Transformer",
+            "Token",
+            "31.6",
+            "30.7",
+            "28.0",
+            "28.5",
+            "43.0",
+            "32.3",
+            "22.2"
+          ],
+          [
+            "SpaceByte++",
+            "",
+            "30.9",
+            "32.1",
+            "40.3",
+            "30.6",
+            "58.5",
+            "38.5",
+            "38.5"
+          ],
+          [
+            "H-Net (space)",
+            "Byte",
+            "31.2",
+            "33.2",
+            "41.9",
+            "31.8",
+            "60.7",
+            "39.8",
+            "40.5"
+          ],
+          [
+            "H-Net (1-stage)",
+            "Byte",
+            "30.9",
+            "32.7",
+            "39.2",
+            "31.2",
+            "58.4",
+            "38.6",
+            "39.5"
+          ],
+          [
+            "H-Net (2-stage)",
+            "",
+            "31.1",
+            "34.7",
+            "44.1",
+            "33.0",
+            "61.7",
+            "40.9",
+            "42.8"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2507.07955v2",
+    "number": "4",
+    "label": "tab: cd-supp",
+    "caption": "Architecture details and model benchmarks for Chinese and code models. BPIC (defined in ) denotes the compression between the main network and outermost stage (bytes). Each H-Net used (3,3)-DC, targeting an inner downsampling ratio of 9. However, the resulting BPIC was significantly different, indicating that code is much easier to compress than Chinese. In terms of results, H-Net (2-stage) performs better than both H-Net (space) and BPE Transformer on Chinese, which is reflected in the downstreams. On the other hand, H-Net (2-stage) achieves similar performance to H-Net (space) on code, and both H-Net models perform significantly better than Transformer.",
+    "page": 17,
+    "section_number": "3.2",
+    "section": "Alternate Language Datasets",
+    "section_path": "Experiments \u003e Alternate Language Datasets",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "Chinese BPIC",
+          "Chinese Main arch.",
+          "Chinese Val. BPB ↓",
+          "Chinese XW-zh. acc. ↑",
+          "Code BPIC",
+          "Code Main arch.",
+          "Code Val. BPB ↓"
+        ],
+        "rows": [
+          [
+            "Transformer",
+            "3.62",
+            "T15",
+            "0.7404",
+            "0.599",
+            "3.58",
+            "T13",
+            "0.3376"
+          ],
+          [
+            "H-Net (space)",
+            "3.38",
+            "T19",
+            "0.7478",
+            "0.629",
+            "7.97",
+            "T40",
+            "0.3163"
+          ],
+          [
+            "H-Net (2-stage)",
+            "5.81",
+            "T30",
+            "0.7032",
+            "0.663",
+            "7.23",
+            "T28",
+            "0.3161"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2507.07955v2",
+    "number": "5",
+    "label": "tab: dna",
+    "caption": "Model details and final performance on HG38. We trained two isotropic models and two H-Net models, varying the main network architecture (Transformer or Mamba-2). Each H-Net model outperforms the corresponding isotropic model. We empirically find that the E^0=M3T1 encoder architecture slightly outperforms a pure Mamba-2 encoder E^0=M4.",
+    "page": 17,
+    "section_number": "3.2",
+    "section": "Alternate Language Datasets",
+    "section_path": "Experiments \u003e Alternate Language Datasets",
+    "parts": [
+      {
+        "header": [
+          "Model / Architecture",
+          "Params.",
+          "Final ppl. ↓"
+        ],
+        "rows": [
+          [
+            "Transformer",
+            "29M",
+            "2.769"
+          ],
+          [
+            "Mamba-2",
+            "33M",
+            "2.757"
+          ],
+          [
+            "H-Net",
+            "64M",
+            "2.705"
+          ],
+          [
+            "H-Net (M3T1+M15+M4)",
+            "66M",
+            "2.697"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2507.07955v2",
+    "number": "6",
+    "label": "tab: related",
+    "caption": "Related architectures. Comparison of related architectures, particularly those focused on byte-level modeling. H-Net is the first architecture that enables dynamic, multi-stage hierarchies. Extended discussion is provided in .",
+    "page": 21,
+    "section_number": "3.3",
+    "section": "Ablation Studies",
+    "section_path": "Experiments \u003e Ablation Studies",
+    "parts": [
+      {
+        "header": [
+          "Class",
+          "Autoregressive",
+          "Chunking Mechanism",
+          "Multi-stage Hierarchy",
+          "Example Architectures"
+        ],
+        "rows": [
+          [
+            "Isotropic",
+            "✗",
+            "---",
+            "---",
+            "ByT5"
+          ],
+          [
+            "Isotropic",
+            "✓",
+            "---",
+            "---",
+            "MambaByte"
+          ],
+          [
+            "Hierarchical (static)",
+            "✗",
+            "k-width pooling",
+            "✓",
+            "Funnel-Transformer"
+          ],
+          [
+            "Hierarchical (static)",
+            "✗",
+            "k-width pooling",
+            "✓",
+            "Canine"
+          ],
+          [
+            "Hierarchical (static)",
+            "✗",
+            "k-width pooling",
+            "✓",
+            "Charformer"
+          ],
+          [
+            "Hierarchical (static)",
+            "✓",
+            "k-width pooling",
+            "✓",
+            "Hourglass Transformer"
+          ],
+          [
+            "Hierarchical (static)",
+            "✓",
+            "k-width pooling",
+            "✓",
+            "SaShiMi"
+          ],
+          [
+            "Hierarchical (static)",
+            "✓",
+            "k-width pooling",
+            "✓",
+            "MegaByte"
+          ],
+          [
+            "Hierarchical (static)",
+            "✓",
+            "k-width pooling",
+            "✓",
+            "Block Transformer"
+          ],
+          [
+            "Hierarchical (static)",
+            "✓",
+            "k-width pooling",
+            "✓",
+            "MBLM"
+          ],
+          [
+            "Hierarchical (static)",
+            "✓",
+            "k-width pooling",
+            "✓",
+            "AU-Net 3"
+          ],
+          [
+            "Hierarchical (external)",
+            "✗",
+            "delimiters",
+            "✗",
+            "eByte"
+          ],
+          [
+            "Hierarchical (external)",
+            "✗",
+            "delimiters",
+            "✗",
+            "WSF"
+          ],
+          [
+            "Hierarchical (external)",
+            "✓",
+            "delimiters",
+            "✗",
+            "DPT (Whitespaces)"
+          ],
+          [
+            "Hierarchical (external)",
+            "✓",
+            "delimiters",
+            "✗",
+            "SpaceByte"
+          ],
+          [
+            "Hierarchical (external)",
+            "✓",
+            "delimiters",
+            "✗",
+            "AU-Net 2"
+          ],
+          [
+            "Hierarchical (external)",
+            "✓",
+            "entropy",
+            "✗",
+            "DPT (Entropy)"
+          ],
+          [
+            "Hierarchical (external)",
+            "✓",
+            "entropy",
+            "✗",
+            "BLT"
+          ],
+          [
+            "Hierarchical (dynamic)",
+            "✓",
+            "soft matching",
+            "✗",
+            "MANTa"
+          ],
+          [
+            "Hierarchical (dynamic)",
+            "✓",
+            "soft gating",
+            "✗",
+            "MrT5"
+          ],
+          [
+            "Hierarchical (dynamic)",
+            "✓",
+            "stochastic reparameterization",
+            "✗",
+            "DPT (Gumbel)"
+          ],
+          [
+            "Hierarchical (dynamic)",
+            "✓",
+            "dynamic chunking",
+            "✓",
+            "H-Net"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2507.07955v2",
+    "number": "7",
+    "label": "tab: dna_supp",
+    "caption": "Encoder architecture ablations on HG38. Switching the encoder architecture from M3T1 to M4 leads to worse performance across the board, though the results are still better than isotropic models (). Transformers in the encoder network do not appear to be helpful for text (), suggesting that this finding may be modality-specific.",
+    "page": 37,
+    "section_number": "E.1",
+    "section": "Different Downsampling Methods in the Chunking Layer",
+    "section_path": "Additional Ablation Studies \u003e Different Downsampling Methods in the Chunking Layer",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "Architecture",
+          "Params.",
+          "Final ppl. ↓"
+        ],
+        "rows": [
+          [
+            "H-Net",
+            "M3T1+T15+M4",
+            "64M",
+            "2.705"
+          ],
+          [
+            "H-Net",
+            "M3T1+M15+M4",
+            "66M",
+            "2.697"
+          ],
+          [
+            "H-Net",
+            "M4+T15+M4",
+            "62M",
+            "2.722"
+          ],
+          [
+            "H-Net",
+            "M4+M15+M4",
+            "64M",
+            "2.706"
+          ],
+          [
+            "H-Net",
+            "M4+T1M13T1+M4",
+            "64M",
+            "2.706"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "paper": "2507.07955v2",
+    "number": "8",
+    "label": "tab: distill",
+    "caption": "Distilling Llama 3.2 3B to a byte level model. Average acc indicates average of the benchmarks measured in . H-Net loses performance across the board compared to the teacher, which is expected because we cannot quite replicate the exact behavior of the original model due to non-causality of BPE tokens. However, it is still much stronger than an H-Net trained from scratch on this small amount of data (189B bytes).",
+    "page": 38,
+    "section_number": "F",
+    "section": "Distilling Token-Level Models to Byte-Level",
+    "section_path": "Distilling Token-Level Models to Byte-Level",
+    "parts": [
+      {
+        "header": [
+          "Model",
+          "LMB. acc ↑",
+          "Hella. acc_n ↑",
+          "PIQA acc ↑",
+          "ARC-e acc ↑",
+          "ARC-c acc_n ↑",
+          "Wino. acc ↑",
+          "Open. acc_n ↑",
+          "Average acc ↑",
+          "MMLU (5-shot) acc ↑"
+        ],
+        "rows": [
+          [
+            "Llama 3.2 3B (base)",
+            "0.701",
+            "0.737",
+            "0.768",
+            "0.745",
+            "0.460",
+            "0.688",
+            "0.428",
+            "0.647",
+            "0.561"
+          ],
+          [
+            "Distilled H-Net (1-stage)",
+            "0.634",
+            "0.702",
+            "0.761",
+            "0.721",
+            "0.433",
+            "0.665",
+            "0.414",
+            "0.617",
+            "0.519"
+          ]
+        ]
+      }
+    ]
+  }
+]
