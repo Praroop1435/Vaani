@@ -1,0 +1,12 @@
+# github.com/Praroop1435/Vaani/cmd/load
+stand-in fitted from 9 real calls: first token = 547 ms + 155 ms per 1K prompt tokens, x lognormal(sigma 0.47); 3.5 ms per content token; 35 hidden reasoning tokens
+answer cache: off (measured run)
+
+=== overload: 8 questions/min for 8 min (~3x what 8K TPM allows) (64 requests, limiter v2-token-bucket)
+status map[ok:28 rate_limited:34 timeout:2] | governor peak queue 3 | stand-in: 100 requests, 98 ok, 0 limited, 0 500s, 0 stalled, 0 cut, peak in flight 2
+
+=== rpm_halved: 2/min for 8 min; the stand-in halves RPM and TPM (15, 4,000) without telling the pipeline (16 requests, limiter v2-token-bucket)
+status map[ok:15 timeout:1] | governor peak queue 1 | stand-in: 35 requests, 34 ok, 0 limited, 0 500s, 0 stalled, 0 cut, peak in flight 1
+
+=== daily_exhausted: 4/min for 4 min with 3 requests left in the day's 1,000 (16 requests, limiter v2-token-bucket)
+status map[ok:4 rate_limited:12] | governor peak queue 1 | stand-in: 5 requests, 5 ok, 0 limited, 0 500s, 0 stalled, 0 cut, peak in flight 1

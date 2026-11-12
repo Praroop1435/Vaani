@@ -1,0 +1,85 @@
+warm-up: HTTP 401 in 894ms (unauthenticated, no quota)
+answer cache: off (measured run)
+
+=== q14 (multi): How many parameters does Helium have, how many tokens was it pretrained on, and which dataset gives Moshi its full-duplex ability?
+> Helium has 7 B parameters [Moshi, p.8, Table 1]. Moshi gains its full‑duplex capability from fine‑tuning on the Fisher dataset [Moshi, p.8, Table 1]. I could not find number of tokens Helium was pretrained on in the papers.
+    status=ok grade=wrong citation_ok=false ttft=3667ms total=6537ms tokens=3862 in / 329 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    49ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   685ms retry=    0ms retries=0 first=560ms tok=244/104 
+    step retrieve_rerank wait=     0ms work=  1872ms retry=    0ms retries=0 first=0ms tok=0/0 query="Helium parameters tokens pretrained Moshi full-duplex dataset"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.791, 3 part(s)
+    step draft      wait=     0ms work=  1588ms retry=    0ms retries=0 first=1061ms tok=2552/155 
+    step retrieve_targeted wait=     0ms work=  1723ms retry=    0ms retries=0 first=0ms tok=0/0 missing P2, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   620ms retry=    0ms retries=0 first=597ms tok=1066/70 
+    cite: missing 2\.1\s*T
+    cite: evidence item 2 not cited
+
+=== q15 (definition): What two techniques make up dynamic chunking in H-Net?
+> The routing module predicts boundaries between adjacent elements through a similarity score [H-Net (Dynamic Chunking), p.2, §1]. The smoothing module interpolates representations using the router’s outputs, attenuating the effect of uncertain boundaries [H-Net (Dynamic Chunking), p.2, §1].
+    status=ok grade=correct citation_ok=true ttft=3694ms total=3793ms tokens=1940 in / 233 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    28ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=  1406ms retry=    0ms retries=0 first=1405ms tok=228/129 
+    step retrieve_rerank wait=     0ms work=  1535ms retry=    0ms retries=0 first=0ms tok=0/0 query="dynamic chunking techniques in H-Net"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.814, 2 part(s)
+    step draft      wait=     0ms work=   824ms retry=    0ms retries=0 first=725ms tok=1712/104 
+
+=== q17 (numeric): How much data are H-Net's main language models trained on, and from which dataset?
+> FineWeb‑Edu‑ChineseV2.1 for Chinese and the Github subset from Pile for code [H-Net (Dynamic Chunking), p.16, §3.2; H-Net (Dynamic Chunking), p.15-16, §3.2] I could not find training data size for H-Net main language models in the papers.
+    status=ok grade=wrong citation_ok=false ttft=3333ms total=5910ms tokens=3115 in / 444 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    40ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   516ms retry=    0ms retries=0 first=331ms tok=234/91 
+    step retrieve_rerank wait=     0ms work=  1801ms retry=    0ms retries=0 first=0ms tok=0/0 query="H-Net main language models training data size and source dataset"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.716, 2 part(s)
+    step draft      wait=     0ms work=   975ms retry=    0ms retries=0 first=876ms tok=1951/199 
+    step retrieve_targeted wait=     0ms work=  1689ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   888ms retry=    0ms retries=0 first=858ms tok=930/154 
+    cite: missing 100\s*B
+    cite: evidence item 1 not cited
+
+=== q18 (table): What average zero-shot accuracy does the 2-stage H-Net reach at the GPT-3 Large FLOPs-matched scale?
+> 58.2 % [H-Net (Dynamic Chunking), p.13, Table 2]
+    status=ok grade=wrong citation_ok=true ttft=5784ms total=5784ms tokens=3894 in / 356 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    27ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   902ms retry=    0ms retries=0 first=789ms tok=241/121 
+    step retrieve_rerank wait=     0ms work=  1772ms retry=    0ms retries=0 first=0ms tok=0/0 query="average zero-shot accuracy 2-stage H-Net GPT-3 Large FLOPs-matched scale"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.722, 1 part(s)
+    step draft      wait=     0ms work=   886ms retry=    0ms retries=0 first=864ms tok=2450/176 
+    step retrieve_targeted wait=     0ms work=  1620ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   577ms retry=    0ms retries=0 first=548ms tok=1203/59 
+    cite: missing 55\.5
+
+=== q19 (unanswerable): What BLEU score does the Transformer reach on English-to-Spanish translation?
+> The papers do not say. The closest passages are Attention Is All You Need, p.8, §6.1; Attention Is All You Need, p.8, Table 2; Attention Is All You Need, p.1, Abstract; Attention Is All You Need, p.7-8, §5.4; Attention Is All You Need, p.9, Table 3; Attention Is All You Need, p.8-9, §6.2; Attention Is All You Need, p.9, Table 3; Attention Is All You Need, p.10, §7.
+    status=ok grade=refused_correctly citation_ok=true ttft=4287ms total=4287ms tokens=3435 in / 162 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    41ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   539ms retry=    0ms retries=0 first=400ms tok=231/43 
+    step retrieve_rerank wait=     0ms work=  1194ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer BLEU English to Spanish"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.718, 1 part(s)
+    step draft      wait=     0ms work=   561ms retry=    0ms retries=0 first=550ms tok=2074/34 
+    step retrieve_targeted wait=     0ms work=  1062ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   890ms retry=    0ms retries=0 first=865ms tok=1130/85 
+
+=== q21 (unanswerable): What image classification accuracy does H-Net report?
+> The papers do not say. The closest passages are H-Net (Dynamic Chunking), p.14, §3.1; H-Net (Dynamic Chunking), p.14, Table 3; H-Net (Dynamic Chunking), p.14, Table 3; H-Net (Dynamic Chunking), p.14, Table 3; H-Net (Dynamic Chunking), p.36, §D.1; H-Net (Dynamic Chunking), p.14, Table 3; H-Net (Dynamic Chunking), p.12, §3.1; H-Net (Dynamic Chunking), p.39, §F.
+    status=ok grade=refused_correctly citation_ok=true ttft=5542ms total=5542ms tokens=3373 in / 141 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    24ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   657ms retry=    0ms retries=0 first=522ms tok=225/58 
+    step retrieve_rerank wait=     0ms work=  2142ms retry=    0ms retries=0 first=0ms tok=0/0 query="H-Net image classification accuracy"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.694, 1 part(s)
+    step draft      wait=     0ms work=   660ms retry=    0ms retries=0 first=648ms tok=2287/44 
+    step retrieve_targeted wait=     0ms work=  1701ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   358ms retry=    0ms retries=0 first=347ms tok=861/39 
+
+=== q22 (unanswerable): Under which license is the Mimi codec released?
+> The papers do not say. The closest passages are Moshi, p.23, Table 4; Moshi, p.12, §3.4; Moshi, p.23, Table 4; Moshi, p.53, Table 17; Moshi, p.23, §5.1; Moshi, p.9, §3.3; Moshi, p.3, §1; Moshi, p.14, §3.4.2.
+    status=ok grade=refused_correctly citation_ok=true ttft=4896ms total=4896ms tokens=3215 in / 159 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    34ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   561ms retry=    0ms retries=0 first=538ms tok=225/45 
+    step retrieve_rerank wait=     0ms work=  1619ms retry=    0ms retries=0 first=0ms tok=0/0 query="Mimi codec license"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.651, 1 part(s)
+    step draft      wait=     0ms work=   671ms retry=    0ms retries=0 first=659ms tok=2095/31 
+    step retrieve_targeted wait=     0ms work=  1363ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   649ms retry=    0ms retries=0 first=625ms tok=895/83 
+
+tokens used: 24658 of 35000 ceiling
+raw traces: results/quality/20261112-145703_traces.jsonl

@@ -4,9 +4,11 @@
 //	chunks_<size>.json   text + table chunks with paper / section / page
 //	vectors_<size>.f32   float32 BGE vectors, one row per chunk, same order
 //	tables.json          every table as structured rows and cells
+//	windows_300.json/.f32 2-sentence windows for setting C (small-to-big), parent = chunk index
 //
 //	go run -tags ORT ./cmd/ingest              full run (~4 min, mostly embedding)
 //	go run -tags ORT ./cmd/ingest -tables-only only tables.json, no embedding
+//	go run -tags ORT ./cmd/ingest -windows-only rebuild windows_300.* from chunks_300.json
 package main
 
 import (
@@ -22,6 +24,7 @@ import (
 
 	"github.com/Praroop1435/Vaani/internal/embed"
 	"github.com/Praroop1435/Vaani/internal/ingest"
+	"github.com/Praroop1435/Vaani/internal/retrieve"
 )
 
 // Chunk sizes for retrieval settings A/C (300) and B (480). bge-base reads at most 512 tokens.
@@ -29,9 +32,41 @@ var sizes = []int{300, 480}
 
 func main() {
 	tablesOnly := flag.Bool("tables-only", false, "write data/index/tables.json and stop")
+	windowsOnly := flag.Bool("windows-only", false, "rebuild windows from the existing chunks_300.json and stop")
+	metaOnly := flag.Bool("meta-only", false, "rebuild vectors_meta_300.f32 (setting R) from the existing index and stop")
 	flag.Parse()
 	ctx := context.Background()
 	start := time.Now()
+	if *metaOnly {
+		e, err := embed.New(ctx, embed.DefaultModelDir)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer e.Close()
+		if err := retrieve.BuildMeta(ctx, e, "data/index", windowParent); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("wrote data/index/vectors_meta_300.f32 in", time.Since(start).Round(time.Second))
+		return
+	}
+	if *windowsOnly {
+		e, err := embed.New(ctx, embed.DefaultModelDir)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer e.Close()
+		js, err := os.ReadFile(fmt.Sprintf("data/index/chunks_%d.json", windowParent))
+		if err != nil {
+			log.Fatal(err)
+		}
+		var chunks []ingest.Chunk
+		if err := json.Unmarshal(js, &chunks); err != nil {
+			log.Fatal(err)
+		}
+		buildWindows(ctx, e, chunks)
+		fmt.Printf("done in %s\n", time.Since(start).Round(time.Millisecond))
+		return
+	}
 
 	type parsed struct {
 		paper  ingest.Paper
@@ -104,34 +139,58 @@ func main() {
 			all = append(all, cs...)
 			all = append(all, ts...)
 		}
-		vf, err := os.Create(fmt.Sprintf("data/index/vectors_%d.f32", size))
-		if err != nil {
-			log.Fatal(err)
+		texts := make([]string, len(all))
+		for i, c := range all {
+			texts[i] = c.Text
 		}
-		for i := 0; i < len(all); i += 32 {
-			batch := all[i:min(i+32, len(all))]
-			texts := make([]string, len(batch))
-			for j, c := range batch {
-				texts[j] = c.Text
-			}
-			vecs, err := e.Embed(ctx, texts)
-			if err != nil {
-				log.Fatalf("embed %s: %v", batch[0].ID, err)
-			}
-			for _, v := range vecs {
-				if err := binary.Write(vf, binary.LittleEndian, v); err != nil {
-					log.Fatal(err)
-				}
-			}
-		}
-		if err := vf.Close(); err != nil {
-			log.Fatal(err)
-		}
+		writeVectors(ctx, e, texts, fmt.Sprintf("data/index/vectors_%d.f32", size))
 		js, _ := json.MarshalIndent(all, "", "  ")
 		if err := os.WriteFile(fmt.Sprintf("data/index/chunks_%d.json", size), js, 0o644); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Printf("size %d: %d chunks written\n", size, len(all))
+		if size == windowParent {
+			buildWindows(ctx, e, all)
+		}
 	}
 	fmt.Printf("done in %s\n", time.Since(start).Round(time.Millisecond))
+}
+
+// Setting C searches 2-sentence windows (stride 1) cut from the 300-token chunks.
+const windowParent, windowSize, windowStride = 300, 2, 1
+
+func buildWindows(ctx context.Context, e *embed.Embedder, chunks []ingest.Chunk) {
+	ws := ingest.Windows(chunks, windowSize, windowStride)
+	texts := make([]string, len(ws))
+	for i, w := range ws {
+		texts[i] = w.Text
+	}
+	writeVectors(ctx, e, texts, fmt.Sprintf("data/index/windows_%d.f32", windowParent))
+	js, _ := json.MarshalIndent(ws, "", "  ")
+	if err := os.WriteFile(fmt.Sprintf("data/index/windows_%d.json", windowParent), js, 0o644); err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("windows: %d from %d chunks\n", len(ws), len(chunks))
+}
+
+// writeVectors embeds texts in batches and writes float32 rows, one per text.
+func writeVectors(ctx context.Context, e *embed.Embedder, texts []string, path string) {
+	vf, err := os.Create(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for i := 0; i < len(texts); i += 32 {
+		vecs, err := e.Embed(ctx, texts[i:min(i+32, len(texts))])
+		if err != nil {
+			log.Fatalf("embed row %d of %s: %v", i, path, err)
+		}
+		for _, v := range vecs {
+			if err := binary.Write(vf, binary.LittleEndian, v); err != nil {
+				log.Fatal(err)
+			}
+		}
+	}
+	if err := vf.Close(); err != nil {
+		log.Fatal(err)
+	}
 }

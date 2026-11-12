@@ -1,0 +1,47 @@
+{
+  "governor_peak_waiting": 6,
+  "limiter": "v2-token-bucket",
+  "pipeline_told": {
+    "RPM": 30,
+    "TPM": 8000,
+    "RPD": 1000
+  },
+  "requests": 32,
+  "scenario": "burst",
+  "standin": {
+    "Requests": 52,
+    "OK": 47,
+    "Limited429": 3,
+    "Failed500": 1,
+    "Stalled": 1,
+    "Dropped": 0,
+    "PeakInFlight": 5
+  },
+  "standin_config": {
+    "capacity": 3,
+    "content_tok_ms": 2.711581395348836,
+    "drop_rate": 0.005,
+    "fail_rate": 0.01,
+    "first_base_ms": 426.610937884704,
+    "first_per_1k_prompt_ms": 128.13562967426012,
+    "first_sigma": 0.3054284283629914,
+    "prompt_overhead": 71,
+    "prompt_ratio": 0.889,
+    "reasoning_tok": 103,
+    "rpd": 1000,
+    "rpd_used_at_start": 0,
+    "rpm": 30,
+    "seed": 1001,
+    "slow_per_extra": 0.3,
+    "stall_ms": 8000,
+    "stall_rate": 0.02,
+    "tpm": 8000
+  },
+  "status": {
+    "error": 1,
+    "ok": 11,
+    "rate_limited": 20
+  },
+  "wall_s": 333.582351708,
+  "what": "2/min for 6 min, plus 20 questions within 5 s at minute 2"
+}

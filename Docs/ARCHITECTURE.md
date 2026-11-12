@@ -56,15 +56,36 @@ flowchart LR
 
 **The daily request budget is the scarcest thing, so every request spends at most 2 model calls** (understand + draft). Retrieval and citation checking are plain code. When the budget runs low we drop step 1 first, then shrink retrieved context, then refuse new requests with an honest "out of budget, try at X" reply, never a guessed answer.
 
-## Retrieval settings to compare (Table 3)
+## Retrieval settings to compare (Table 3), frozen 2026-11-11
 
-| Setting | Chunk | Top-k | Graph expand | Purpose |
+| Setting | Chunk | Top-k | Search over | Purpose |
 |---|---|---|---|---|
-| A | ~300 tokens | 4 | no | Cheap baseline |
-| B | ~480 tokens (bge-base max is 512) | 3 | no | More context per hit, more tokens |
-| C | ~300 tokens | 4 | yes, 1 hop, re-ranked by cosine, token cap | Small chunks plus the table/figure/neighbour they point to |
+| A | ~300 tokens | 4 | chunks | Cheap baseline |
+| B | ~480 tokens (bge-base max is 512) | 3 | chunks | More context per hit, more tokens |
+| C | ~300 tokens | 4 | 2-sentence windows (1,929, stride 1), best window per parent chunk | Small-to-big: a one-line answer gets its own vector; the model still sees the whole 300-token chunk, so tokens match A |
+
+Benchmark (22 PDF-verified questions, retrieval only; see `Docs/RETRIEVAL_EVAL.md`): **A 12/18 (66.7%)**, B 7/18 (38.9%), C 8/18 (44.4%) answerable questions fully retrieved. **A is the pipeline default.** Experimental: hybrid H10/H15 (BGE + BM25, RRF; `internal/retrieve/hybrid.go`) found 13/18 but gave no end-to-end gain, so it isn't adopted. The page graph and reranker are not built: no benchmark gap they would close. The A+meta variant (section prefix in embeddings) scored 13/18, which is within noise, so it isn't adopted.
 
 **Not building an LLM-made knowledge graph (GraphRAG style).** Building it would send all 120 pages through Groq: roughly 120K+ tokens against a 200K daily budget, before answering a single question.
+
+## Pipeline as built (2026-11-11, after the smoke-test fixes)
+
+| Step | Kind | What it does | When it is skipped or changes |
+|---|---|---|---|
+| 2a. Retrieve | tool | Setting A top-4 on the raw question (~20 ms) | - |
+| 3. Decide | branch | Best score < 0.50: refuse with no model call | - |
+| 1. Understand | model call (max 150 tok) | JSON `{"query", "parts"}`: what the question asks for, ≤ 4 self-contained parts | Skipped below 100 daily requests left; on failure: one part = the question |
+| 2b. Retrieve | tool | Search again with the rewrite, keep the best 4 | Only if the rewrite differs |
+| 4. Draft | model call (max 350 tok), streamed | One `[P#] … [S#].` sentence per part, or `[P#] MISSING`, or `NOT IN PAPERS` | - |
+| 5. Check | tool | Per sentence: `[S#]` names a real passage, every number appears in a cited passage. Only passing sentences are shown. Tracks which parts are covered | - |
+| Loop | tool + model call | For missing parts: targeted retrieval per part (≤ 2 new chunks per part, ≤ 4 total), then a draft for those parts with only the new passages, checked the same way | Skipped with < 5 s left or < 100 daily requests left |
+| End | - | Still-missing parts are said plainly. No part answered: "The papers do not say" + closest passages | - |
+
+**At most 3 model calls per request** (up from 2): understand, draft, targeted draft. Offline, A averages 2.45. Every refusal now costs 3 calls, because the targeted round runs first.
+
+**Reliability:** a 20 s give-up deadline per request. Each model call gets a 6 s first-token timeout and a 15 s attempt timeout. Up to 2 retries with jittered backoff, honouring `retry-after`. No retry on 400s or the daily-limit 429, and no retry that can't finish before the deadline. The governor waits for RPM/TPM room only if that wait fits the deadline. The daily budget is modelled as Groq runs it: it refills continuously, one request every 24 h / limit (measured 86.4 s), with full reset at `x-ratelimit-reset-requests`. When a model call can't be made, the person gets the passages most likely to answer, with labels, plus "next request in ~X, full quota back by HH:MM". Never a guessed answer.
+
+**Offline result** (oracle model, `Docs/PIPELINE_OFFLINE_EVAL.md`): A 14/22 correct, 0 wrong, 4/4 refusals correct.
 
 ## How to run
 

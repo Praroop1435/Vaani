@@ -1,0 +1,164 @@
+# github.com/Praroop1435/Vaani/cmd/smoke
+warm-up: HTTP 401 in 511ms (unauthenticated, no quota)
+answer cache: off (measured run)
+
+=== q01 (numeric): How many parallel attention heads does the base Transformer use?
+> The papers do not say. The closest passages are Attention Is All You Need, p.5, §3.2.3; Attention Is All You Need, p.2, §1; Attention Is All You Need, p.2, §2; Attention Is All You Need, p.9, §6.2; H-Net (Dynamic Chunking), p.5, §2.1.2; H-Net (Dynamic Chunking), p.11, §3.
+    status=ok grade=refused_wrongly citation_ok=false ttft=1546ms total=1546ms tokens=2157 in / 126 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    38ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   495ms retry=    0ms retries=0 first=436ms tok=227/40 
+    step retrieve_rewrite wait=     0ms work=    29ms retry=    0ms retries=0 first=0ms tok=0/0 query="base Transformer parallel attention heads"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.673, 1 part(s)
+    step draft      wait=     0ms work=   397ms retry=    0ms retries=0 first=373ms tok=1130/34 
+    step retrieve_targeted wait=     0ms work=    36ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   552ms retry=    0ms retries=0 first=523ms tok=800/52 
+    cite: evidence item 1 not cited
+
+=== q02 (numeric): What dropout rate does the base Transformer model use?
+> The papers do not say. The closest passages are Attention Is All You Need, p.8-9, §6.2; Attention Is All You Need, p.8, Table 2; Attention Is All You Need, p.8, §6.1; Attention Is All You Need, p.8, §5.4; Moshi, p.53, Table 17; H-Net (Dynamic Chunking), p.22, §4.
+    status=ok grade=refused_wrongly citation_ok=false ttft=1502ms total=1502ms tokens=2820 in / 187 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    37ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   497ms retry=    0ms retries=0 first=442ms tok=226/38 
+    step retrieve_rewrite wait=     0ms work=    29ms retry=    0ms retries=0 first=0ms tok=0/0 query="base Transformer dropout rate"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.672, 1 part(s)
+    step draft      wait=     0ms work=   518ms retry=    0ms retries=0 first=499ms tok=1498/106 
+    step retrieve_targeted wait=     0ms work=    30ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   392ms retry=    0ms retries=0 first=361ms tok=1096/43 
+    cite: evidence item 1 not cited
+
+=== q03 (numeric): How many warmup steps does the Transformer's learning-rate schedule use?
+> 4000 [Attention Is All You Need, p.7, §5.3]
+    status=ok grade=correct citation_ok=true ttft=1229ms total=1229ms tokens=1435 in / 97 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    83ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   695ms retry=    0ms retries=0 first=633ms tok=230/43 
+    step retrieve_rewrite wait=     0ms work=    30ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer warmup steps learning rate schedule"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.733, 1 part(s)
+    step draft      wait=     0ms work=   422ms retry=    0ms retries=0 first=397ms tok=1205/54 
+
+=== q04 (numeric): What hardware were the Transformer models trained on?
+> The Transformer models were trained on H100 GPUs [Moshi, p.20, §4.4].
+    status=ok grade=wrong citation_ok=false ttft=1278ms total=1278ms tokens=1596 in / 146 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    43ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   452ms retry=    0ms retries=0 first=407ms tok=225/44 
+    step retrieve_rewrite wait=     0ms work=    23ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer training hardware"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.685, 1 part(s)
+    step draft      wait=     0ms work=   761ms retry=    0ms retries=0 first=727ms tok=1371/102 
+    cite: missing P100
+    cite: evidence item 1 not cited
+
+=== q05 (table): What BLEU score does the Transformer (big) model reach on WMT 2014 English-to-German?
+> 28.4 BLEU [Attention Is All You Need, p.8, §6.1; Attention Is All You Need, p.8, Table 2]
+    status=ok grade=correct citation_ok=true ttft=1151ms total=1151ms tokens=1489 in / 122 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    52ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   502ms retry=    0ms retries=0 first=413ms tok=239/56 
+    step retrieve_rewrite wait=     0ms work=    33ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer big BLEU WMT 2014 English German"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.797, 1 part(s)
+    step draft      wait=     0ms work=   563ms retry=    0ms retries=0 first=522ms tok=1250/66 
+
+=== q06 (table): How many parameters does the big Transformer have in the model-variations table?
+> 213 × 10⁶ parameters [Attention Is All You Need, p.9, Table 3].
+    status=ok grade=correct citation_ok=true ttft=1526ms total=1526ms tokens=1906 in / 131 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    57ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   387ms retry=    0ms retries=0 first=322ms tok=232/68 
+    step retrieve_rewrite wait=     0ms work=    23ms retry=    0ms retries=0 first=0ms tok=0/0 query="big Transformer parameters model-variations table"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.704, 1 part(s)
+    step draft      wait=     0ms work=  1059ms retry=    0ms retries=0 first=1023ms tok=1674/63 
+
+=== q07 (multi): How many sentence pairs are in the English-German training data, and what BLEU does the base Transformer reach on English-to-German?
+> about 4.5 million sentence pairs [Attention Is All You Need, p.7, §5.1]. 27.3 BLEU on English‑to‑German translation [Attention Is All You Need, p.8, Table 2].
+    status=ok grade=correct citation_ok=true ttft=1726ms total=1770ms tokens=1582 in / 214 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    72ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   953ms retry=    0ms retries=0 first=815ms tok=244/101 
+    step retrieve_rewrite wait=     0ms work=    38ms retry=    0ms retries=0 first=0ms tok=0/0 query="English-German training sentence pairs and base Transformer BLEU English-to-German"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.745, 2 part(s)
+    step draft      wait=     0ms work=   708ms retry=    0ms retries=0 first=628ms tok=1338/113 
+
+=== q08 (numeric): What frame rate does the Mimi codec run at?
+> 12.5 Hz [Moshi, p.23, Table 4]
+    status=ok grade=correct citation_ok=true ttft=1120ms total=1121ms tokens=1678 in / 115 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    78ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   328ms retry=    0ms retries=0 first=275ms tok=226/37 
+    step retrieve_rewrite wait=     0ms work=    34ms retry=    0ms retries=0 first=0ms tok=0/0 query="Mimi codec frame rate"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.730, 1 part(s)
+    step draft      wait=     0ms work=   680ms retry=    0ms retries=0 first=638ms tok=1452/78 
+
+=== q10 (numeric): What latency does Moshi achieve?
+> Moshi achieves a theoretical inference latency of 160 ms and an observed practical latency of 200 ms [Moshi, p.26, §5.3; Moshi, p.1-2, Abstract]
+    status=ok grade=correct citation_ok=true ttft=1372ms total=1372ms tokens=1277 in / 155 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    72ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   587ms retry=    0ms retries=0 first=520ms tok=223/42 
+    step retrieve_rewrite wait=     0ms work=    27ms retry=    0ms retries=0 first=0ms tok=0/0 query="Moshi latency"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.673, 1 part(s)
+    step draft      wait=     0ms work=   686ms retry=    0ms retries=0 first=620ms tok=1054/113 
+
+=== q12 (numeric): What GPUs were the Moshi models trained on?
+> H100 GPUs [Moshi, p.20, §4.4]. H100 GPUs [Moshi, p.20, §4.4].
+    status=ok grade=correct citation_ok=true ttft=1985ms total=2009ms tokens=3529 in / 180 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    99ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   612ms retry=    0ms retries=0 first=499ms tok=226/70 
+    step retrieve_rewrite wait=     0ms work=    17ms retry=    0ms retries=0 first=0ms tok=0/0 query="Moshi training hardware GPUs"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.630, 2 part(s)
+    step draft      wait=     0ms work=   740ms retry=    0ms retries=0 first=727ms tok=1813/34 
+    step retrieve_targeted wait=     0ms work=    69ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1,P2, added 4 chunk(s)
+    step draft_targeted wait=     0ms work=   472ms retry=    0ms retries=0 first=424ms tok=1490/76 
+
+=== q13 (definition): What is Inner Monologue in Moshi?
+> Inner Monologue is a training and inference procedure that jointly models text and audio tokens, predicting time‑aligned text tokens before audio tokens to improve factuality and linguistic quality of generated speech [Moshi, p.6-7, §3.1; Moshi, p.3, §1].
+    status=ok grade=correct citation_ok=true ttft=1434ms total=1434ms tokens=1651 in / 149 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    81ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   664ms retry=    0ms retries=0 first=525ms tok=225/66 
+    step retrieve_rewrite wait=     0ms work=    22ms retry=    0ms retries=0 first=0ms tok=0/0 query="Inner Monologue Moshi"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.658, 1 part(s)
+    step draft      wait=     0ms work=   668ms retry=    0ms retries=0 first=571ms tok=1426/83 
+
+=== q14 (multi): How many parameters does Helium have, how many tokens was it pretrained on, and which dataset gives Moshi its full-duplex ability?
+> Helium has 7 B parameters [Moshi, p.8, Table 1]. The Fisher dataset gives Moshi its full‑duplex ability [Moshi, p.8, Table 1]. 2.1 trillion tokens [Moshi, p.22-23, §5.1]
+    status=ok grade=correct citation_ok=true ttft=1906ms total=2620ms tokens=3136 in / 368 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    67ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   737ms retry=    0ms retries=0 first=611ms tok=244/101 
+    step retrieve_rewrite wait=     0ms work=    43ms retry=    0ms retries=0 first=0ms tok=0/0 query="Helium parameters tokens pretrained dataset full-duplex Moshi"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.787, 3 part(s)
+    step draft      wait=     0ms work=  1124ms retry=    0ms retries=0 first=1028ms tok=1980/206 
+    step retrieve_targeted wait=     0ms work=    31ms retry=    0ms retries=0 first=0ms tok=0/0 missing P2, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   617ms retry=    0ms retries=0 first=580ms tok=912/61 
+
+=== q15 (definition): What two techniques make up dynamic chunking in H-Net?
+> The papers do not say. The closest passages are H-Net (Dynamic Chunking), p.6, §2.2; H-Net (Dynamic Chunking), p.23, §5; H-Net (Dynamic Chunking), p.3-4, §1; H-Net (Dynamic Chunking), p.5, §2.1.1; H-Net (Dynamic Chunking), p.8, §2.2.3; H-Net (Dynamic Chunking), p.2, §1; H-Net (Dynamic Chunking), p.1, Title page; H-Net (Dynamic Chunking), p.21, §3.3.
+    status=ok grade=refused_wrongly citation_ok=false ttft=1929ms total=1929ms tokens=2588 in / 265 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    44ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   378ms retry=    0ms retries=0 first=299ms tok=228/68 
+    step retrieve_rewrite wait=     0ms work=    28ms retry=    0ms retries=0 first=0ms tok=0/0 query="dynamic chunking techniques in H-Net"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.851, 2 part(s)
+    step draft      wait=     0ms work=   876ms retry=    0ms retries=0 first=834ms tok=1274/151 
+    step retrieve_targeted wait=     0ms work=    45ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1,P2, added 4 chunk(s)
+    step draft_targeted wait=     0ms work=   556ms retry=    0ms retries=0 first=509ms tok=1086/46 
+    cite: evidence item 1 not cited
+
+=== q17 (numeric): How much data are H-Net's main language models trained on, and from which dataset?
+> less than 200 B bytes of training [H-Net (Dynamic Chunking), p.22, §4]. I could not find dataset used to train H-Net main language models in the papers.
+    status=ok grade=wrong citation_ok=false ttft=4956ms total=5409ms tokens=2424 in / 269 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=   105ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=  2313ms retry=    0ms retries=0 first=2214ms tok=234/91 
+    step retrieve_rewrite wait=     0ms work=    72ms retry=    0ms retries=0 first=0ms tok=0/0 query="H-Net main language models training data size and source dataset"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.731, 2 part(s)
+    step draft      wait=     0ms work=  2507ms retry=    0ms retries=0 first=2431ms tok=1359/135 
+    step retrieve_targeted wait=     0ms work=    25ms retry=    0ms retries=0 first=0ms tok=0/0 missing P2, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   387ms retry=    0ms retries=0 first=376ms tok=831/43 
+    cite: missing 100\s*B
+    cite: missing FineWeb
+    cite: evidence item 1 not cited
+
+=== q18 (table): What average zero-shot accuracy does the 2-stage H-Net reach at the GPT-3 Large FLOPs-matched scale?
+> The papers do not say. The closest passages are H-Net (Dynamic Chunking), p.13, Table 2; H-Net (Dynamic Chunking), p.13, Table 2; H-Net (Dynamic Chunking), p.13, Table 2; H-Net (Dynamic Chunking), p.37, §E.2; H-Net (Dynamic Chunking), p.17, §3.3; H-Net (Dynamic Chunking), p.13, Table 2.
+    status=ok grade=refused_wrongly citation_ok=false ttft=2219ms total=2219ms tokens=2964 in / 324 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    85ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   696ms retry=    0ms retries=0 first=570ms tok=241/124 
+    step retrieve_rewrite wait=     0ms work=    39ms retry=    0ms retries=0 first=0ms tok=0/0 query="average zero-shot accuracy of 2-stage H-Net at GPT-3 Large FLOPs-matched scale"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.736, 1 part(s)
+    step draft      wait=     0ms work=   743ms retry=    0ms retries=0 first=720ms tok=1789/137 
+    step retrieve_targeted wait=     0ms work=    53ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   604ms retry=    0ms retries=0 first=580ms tok=934/63 
+    cite: evidence item 1 not cited
+
+tokens used: 35080 of 90000 ceiling
+raw traces: results/quality/20261111-222925_traces.jsonl

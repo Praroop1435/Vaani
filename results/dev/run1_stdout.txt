@@ -1,0 +1,109 @@
+warm-up: HTTP 401 in 997ms (unauthenticated, no quota)
+answer cache: off (measured run)
+
+=== d02 (numeric): What label smoothing value was used when training the Transformer?
+> 0.1 [Attention Is All You Need, p.8, §5.4]
+    status=ok grade=correct citation_ok=true ttft=3016ms total=3016ms tokens=1467 in / 117 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    36ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   454ms retry=    0ms retries=0 first=404ms tok=227/38 
+    step retrieve_rerank wait=     0ms work=  1238ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer label smoothing value"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.751, 1 part(s)
+    step draft      wait=     0ms work=  1289ms retry=    0ms retries=0 first=1260ms tok=1240/79 
+
+=== d03 (numeric): Which values of beta1 and beta2 does the Transformer's Adam optimizer use?
+> 0.9 [Attention Is All You Need, p.7, §5.3]. 0.98 [Attention Is All You Need, p.7, §5.3].
+    status=ok grade=correct citation_ok=true ttft=2627ms total=2651ms tokens=2643 in / 134 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    43ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   590ms retry=    0ms retries=0 first=490ms tok=232/58 
+    step retrieve_rerank wait=     0ms work=  1315ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer Adam optimizer beta1 beta2 values"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.705, 2 part(s)
+    step draft      wait=     0ms work=   703ms retry=    0ms retries=0 first=650ms tok=2411/76 
+
+=== d07 (numeric): How many hours of audio are in Moshi's unsupervised audio dataset?
+> 7 million hours of audio [Moshi, p.17-18, §4.2]
+    status=ok grade=correct citation_ok=true ttft=3863ms total=3864ms tokens=2465 in / 112 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    43ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   675ms retry=    0ms retries=0 first=588ms tok=232/50 
+    step retrieve_rerank wait=     0ms work=  1921ms retry=    0ms retries=0 first=0ms tok=0/0 query="Moshi unsupervised audio dataset total hours"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.718, 1 part(s)
+    step draft      wait=     0ms work=  1226ms retry=    0ms retries=0 first=1193ms tok=2233/62 
+
+=== d09 (numeric): How many codebooks does the Mimi codec use in Moshi?
+> The Mimi codec uses 8 codebooks in Moshi [Moshi, p.14, §3.4.2].
+    status=ok grade=correct citation_ok=false ttft=2689ms total=2689ms tokens=2971 in / 88 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    38ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   343ms retry=    0ms retries=0 first=275ms tok=229/44 
+    step retrieve_rerank wait=     0ms work=  1942ms retry=    0ms retries=0 first=0ms tok=0/0 query="Mimi codec codebooks count"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.619, 1 part(s)
+    step draft      wait=     0ms work=   366ms retry=    0ms retries=0 first=325ms tok=2742/44 
+    cite: evidence item 1 not cited
+
+=== d10 (numeric): Which Whisper model was used to transcribe Moshi's audio training set?
+> large‑v3 model [Moshi, p.17-18, §4.2]
+    status=ok grade=correct citation_ok=true ttft=2981ms total=2981ms tokens=2105 in / 144 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    43ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   611ms retry=    0ms retries=0 first=539ms tok=231/74 
+    step retrieve_rerank wait=     0ms work=  1676ms retry=    0ms retries=0 first=0ms tok=0/0 query="Whisper model used to transcribe Moshi audio training set"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.743, 1 part(s)
+    step draft      wait=     0ms work=   650ms retry=    0ms retries=0 first=621ms tok=1874/70 
+
+=== d11 (numeric): For how many steps is Moshi fine-tuned on the Fisher dataset stage?
+> 10k steps [Moshi, p.20-21, §4.4; Moshi, p.8, Table 1]
+    status=ok grade=wrong citation_ok=true ttft=3002ms total=3002ms tokens=2795 in / 172 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    41ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   653ms retry=    0ms retries=0 first=652ms tok=232/102 
+    step retrieve_rerank wait=     0ms work=  1749ms retry=    0ms retries=0 first=0ms tok=0/0 query="Moshi fine-tuning steps Fisher dataset stage"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.693, 1 part(s)
+    step draft      wait=     0ms work=   559ms retry=    0ms retries=0 first=523ms tok=2563/70 
+    cite: missing 100\s*k|100,?000
+
+=== d13 (numeric): How much does H-Net improve data efficiency on DNA sequences over baselines?
+> nearly 4× improvement in data efficiency over baselines [H-Net (Dynamic Chunking), p.1, Abstract].
+    status=ok grade=correct citation_ok=true ttft=2651ms total=2651ms tokens=1765 in / 179 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    40ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   538ms retry=    0ms retries=0 first=447ms tok=231/76 
+    step retrieve_rerank wait=     0ms work=  1488ms retry=    0ms retries=0 first=0ms tok=0/0 query="H-Net data efficiency improvement on DNA sequences versus baseline models"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.808, 1 part(s)
+    step draft      wait=     0ms work=   585ms retry=    0ms retries=0 first=584ms tok=1534/103 
+
+=== d15 (numeric): Beyond English text, which other kinds of data is H-Net evaluated on?
+> Chinese text data [H-Net (Dynamic Chunking), p.10, §3] code data [H-Net (Dynamic Chunking), p.10, §3] I could not find speech data evaluated with H-Net in the papers. I could not find audio-visual (video) data evaluated with H-Net in the papers.
+    status=ok grade=wrong citation_ok=true ttft=3585ms total=7682ms tokens=4224 in / 435 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    40ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   694ms retry=    0ms retries=0 first=536ms tok=231/131 
+    step retrieve_rerank wait=     0ms work=  2034ms retry=    0ms retries=0 first=0ms tok=0/0 query="H-Net evaluation beyond English text data types"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.788, 4 part(s)
+    step draft      wait=     0ms work=   837ms retry=    0ms retries=0 first=817ms tok=2439/127 
+    step retrieve_targeted wait=     0ms work=  3173ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1,P3, added 4 chunk(s)
+    step draft_targeted wait=     0ms work=   905ms retry=    0ms retries=0 first=904ms tok=1554/177 
+    cite: missing DNA
+
+=== d16 (definition): How does the Transformer paper describe an attention function?
+> An attention function is described as mapping a query and a set of key‑value pairs to an output, where the query, keys, values, and output are all vectors, and the output is computed as a weighted sum of the values with weights determined by a compatibility function of the query with each key [Attention Is All You Need, p.3-4, §3.2].
+    status=ok grade=correct citation_ok=true ttft=2217ms total=2217ms tokens=1607 in / 156 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    36ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   524ms retry=    0ms retries=0 first=475ms tok=226/52 
+    step retrieve_rerank wait=     0ms work=  1004ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer paper description of attention function"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.723, 1 part(s)
+    step draft      wait=     0ms work=   653ms retry=    0ms retries=0 first=510ms tok=1381/104 
+
+=== d17 (definition): What does the Temporal Transformer do in Moshi?
+> The Temporal Transformer maps the sequence of previous joint sub‑sequence values (V0,…,Vs−1) to a temporal context vector zs ∈ ℝd for each step s ≤ S, i.e., zs = TrTemp(V0,…,Vs−1) [Moshi, p.13, §3.4.1].
+    status=ok grade=correct citation_ok=true ttft=2985ms total=2985ms tokens=2267 in / 169 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    37ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   435ms retry=    0ms retries=0 first=297ms tok=226/52 
+    step retrieve_rerank wait=     0ms work=  1872ms retry=    0ms retries=0 first=0ms tok=0/0 query="Temporal Transformer role in Moshi"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.701, 1 part(s)
+    step draft      wait=     0ms work=   640ms retry=    0ms retries=0 first=560ms tok=2041/117 
+
+=== d18 (definition): What does the smoothing module do in H-Net?
+> The smoothing module transforms discrete chunking operations into continuous, differentiable interpolations—using confidence scores or an exponential moving average—to smooth low‑confidence boundaries, correct misalignments during upsampling, and improve training stability and learnability [H-Net (Dynamic Chunking), p.7, §2.2.2; H-Net (Dynamic Chunking), p.2, §1].
+    status=ok grade=correct citation_ok=true ttft=2271ms total=2271ms tokens=1944 in / 131 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    35ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   324ms retry=    0ms retries=0 first=274ms tok=226/38 
+    step retrieve_rerank wait=     0ms work=  1266ms retry=    0ms retries=0 first=0ms tok=0/0 query="H-Net smoothing module function"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.728, 1 part(s)
+    step draft      wait=     0ms work=   646ms retry=    0ms retries=0 first=523ms tok=1718/93 
+
+tokens used: 28090 of 45000 ceiling
+raw traces: results/dev/20261112-020416_traces.jsonl

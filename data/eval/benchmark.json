@@ -1,0 +1,151 @@
+{
+  "version": "2026-11-11",
+  "author": "Claude draft from the PDFs; Praroop to review, edit and own (the brief asks for questions you wrote yourself)",
+  "how_verified": "test/benchmark_test.go checks every quote is on the stated page of the PDF text (pdftotext, whitespace-normalised), every table cell against tables.json and the PDF page, and every 'absent' pattern against the full text of all three papers.",
+  "questions": [
+    {"id": "q01", "type": "numeric", "answerable": true,
+     "question": "How many parallel attention heads does the base Transformer use?",
+     "answer": "8 heads (h = 8).", "accept": ["\\b8\\b"],
+     "evidence": [{"any_of": [{"paper": "1706.03762v7", "page": 5, "quote": "we employ h = 8 parallel attention layers, or heads"}]}]},
+
+    {"id": "q02", "type": "numeric", "answerable": true,
+     "question": "What dropout rate does the base Transformer model use?",
+     "answer": "P_drop = 0.1.", "accept": ["0\\.1"],
+     "evidence": [{"any_of": [{"paper": "1706.03762v7", "page": 8, "quote": "For the base model, we use a rate of Pdrop = 0.1"}]}]},
+
+    {"id": "q03", "type": "numeric", "answerable": true,
+     "question": "How many warmup steps does the Transformer's learning-rate schedule use?",
+     "answer": "4000 warmup steps.", "accept": ["4,?000"],
+     "evidence": [{"any_of": [{"paper": "1706.03762v7", "page": 7, "quote": "We used warmup_steps = 4000"}]}]},
+
+    {"id": "q04", "type": "numeric", "answerable": true,
+     "question": "What hardware were the Transformer models trained on?",
+     "answer": "One machine with 8 NVIDIA P100 GPUs.", "accept": ["P100"],
+     "notes": "Run 2 (2026-11-11): added the page-2 source after reading run-1 hits; it fully answers the question.",
+     "evidence": [{"any_of": [
+       {"paper": "1706.03762v7", "page": 7, "quote": "We trained our models on one machine with 8 NVIDIA P100 GPUs"},
+       {"paper": "1706.03762v7", "page": 2, "quote": "trained for as little as twelve hours on eight P100 GPUs"}]}]},
+
+    {"id": "q05", "type": "table", "answerable": true,
+     "question": "What BLEU score does the Transformer (big) model reach on WMT 2014 English-to-German?",
+     "answer": "28.4 BLEU.", "accept": ["28\\.4"],
+     "evidence": [{"any_of": [
+       {"paper": "1706.03762v7", "page": 8, "table": "Table 2", "row": "Transformer (big)", "column": "BLEU EN-DE", "value": "28.4"},
+       {"paper": "1706.03762v7", "page": 1, "quote": "achieves 28.4 BLEU on the WMT 2014"},
+       {"paper": "1706.03762v7", "page": 8, "quote": "establishing a new state-of-the-art BLEU score of 28.4"}]}],
+     "notes": "Run 4 (2026-11-11): added the §6.1 source after live smoke test 3 cited it correctly."},
+
+    {"id": "q06", "type": "table", "answerable": true,
+     "question": "How many parameters does the big Transformer have in the model-variations table?",
+     "answer": "213 million.", "accept": ["213"],
+     "evidence": [{"any_of": [{"paper": "1706.03762v7", "page": 9, "table": "Table 3", "row": "big", "column": "params ×10^6", "value": "213"}]}]},
+
+    {"id": "q07", "type": "multi", "answerable": true,
+     "question": "How many sentence pairs are in the English-German training data, and what BLEU does the base Transformer reach on English-to-German?",
+     "parts": ["number of sentence pairs in the WMT 2014 English-German training data", "BLEU score of the base Transformer on English-to-German"],
+     "answer": "About 4.5 million sentence pairs; the base model reaches 27.3 BLEU.", "accept": ["4\\.5\\s*M", "27\\.3"],
+     "evidence": [
+       {"any_of": [{"paper": "1706.03762v7", "page": 7, "quote": "consisting of about 4.5 million sentence pairs"}]},
+       {"any_of": [{"paper": "1706.03762v7", "page": 8, "table": "Table 2", "row": "Transformer (base model)", "column": "BLEU EN-DE", "value": "27.3"}]}]},
+
+    {"id": "q08", "type": "numeric", "answerable": true,
+     "question": "What frame rate does the Mimi codec run at?",
+     "answer": "12.5 Hz (12.5 frames per second).", "accept": ["12\\.5"],
+     "notes": "Written three ways in the paper: '12.5 frames per second', '12.5Hz', '12.5 Hz'. A string match on one form misses the others.",
+     "evidence": [{"any_of": [
+       {"paper": "2410.00037v1", "page": 10, "quote": "a latent representation of 12.5 frames per second"},
+       {"paper": "2410.00037v1", "page": 11, "quote": "At 12.5Hz, this represents a bitrate of 1.1kbps"},
+       {"paper": "2410.00037v1", "page": 8, "table": "Table 1", "row": "Frame rate", "column": "Moshi training pre-training", "value": "12.5 Hz"},
+       {"paper": "2410.00037v1", "page": 23, "table": "Table 4", "row": "Mimi, adv. loss only", "column": "f_r", "value": "12.5Hz"}]}]},
+
+    {"id": "q09", "type": "numeric", "answerable": true,
+     "question": "What bitrate does Mimi reach?",
+     "answer": "1.1 kbps.", "accept": ["1\\.1\\s*kbps"],
+     "evidence": [{"any_of": [
+       {"paper": "2410.00037v1", "page": 11, "quote": "this represents a bitrate of 1.1kbps"},
+       {"paper": "2410.00037v1", "page": 23, "table": "Table 4", "row": "Mimi, adv. loss only", "column": "bitrate", "value": "1.1kbps"}]}]},
+
+    {"id": "q10", "type": "numeric", "answerable": true,
+     "question": "What latency does Moshi achieve?",
+     "answer": "160 ms theoretical, 200 ms in practice.", "accept": ["160\\s*ms", "200\\s*ms"],
+     "evidence": [{"any_of": [{"paper": "2410.00037v1", "page": 1, "quote": "with a theoretical latency of 160ms, 200ms in practice"}]}]},
+
+    {"id": "q11", "type": "table", "answerable": true,
+     "question": "What is the model dimension of the Helium language model?",
+     "answer": "4096.", "accept": ["4,?096"],
+     "evidence": [{"any_of": [{"paper": "2410.00037v1", "page": 8, "table": "Table 1", "row": "Model dimension", "column": "Helium training pre-training", "value": "4096"}]}]},
+
+    {"id": "q12", "type": "numeric", "answerable": true,
+     "question": "What GPUs were the Moshi models trained on?",
+     "answer": "H100 GPUs.", "accept": ["H100"],
+     "notes": "Looks unanswerable but is stated once, in a training-details paragraph.",
+     "evidence": [{"any_of": [{"paper": "2410.00037v1", "page": 20, "quote": "All models are trained on H100 GPUs"}]}]},
+
+    {"id": "q13", "type": "definition", "answerable": true,
+     "question": "What is Inner Monologue in Moshi?",
+     "answer": "Moshi first predicts time-aligned text tokens as a prefix to its audio tokens, which improves the linguistic quality of the speech and enables streaming ASR and TTS.", "accept": ["text\\b.*\\btokens", "prefix|aligned|jointly|chain"],
+     "evidence": [{"any_of": [
+       {"paper": "2410.00037v1", "page": 1, "quote": "first predict time-aligned text tokens as a prefix to audio tokens"},
+       {"paper": "2410.00037v1", "page": 5, "quote": "Inner Monologue decomposes speech into a chain of text, semantic and acoustic tokens"},
+       {"paper": "2410.00037v1", "page": 7, "quote": "a training and inference procedure in which we jointly model text and audio tokens"}]}],
+     "notes": "Run 2 (2026-11-11): added the page-7 source after reading run-1 hits; it defines the method."},
+
+    {"id": "q14", "type": "multi", "answerable": true,
+     "question": "How many parameters does Helium have, how many tokens was it pretrained on, and which dataset gives Moshi its full-duplex ability?",
+     "answer": "7B parameters, 2.1T tokens; full-duplex comes from fine-tuning on the Fisher dataset.", "accept": ["7\\s*B", "2\\.1\\s*T", "Fisher"],
+     "parts": ["number of parameters of Helium", "number of tokens Helium was pretrained on", "dataset that gives Moshi its full-duplex ability"],
+     "notes": "Run 3 (2026-11-11): split into one evidence item per part; added the p.8 caption (7B) and the §5.1 passage (2.1T) after the live smoke test showed they fully answer.",
+     "evidence": [
+       {"any_of": [
+         {"paper": "2410.00037v1", "page": 3, "quote": "a 7B-parameter text LLM"},
+         {"paper": "2410.00037v1", "page": 8, "quote": "our 7B-parameter Helium language model"}]},
+       {"any_of": [
+         {"paper": "2410.00037v1", "page": 3, "quote": "that we pretrain on 2.1T tokens"},
+         {"paper": "2410.00037v1", "page": 22, "quote": "the 2.1T tokens that are used to train Helium"}]},
+       {"any_of": [
+         {"paper": "2410.00037v1", "page": 8, "quote": "Fine-tuning on the Fisher dataset (Cieri et al., 2004) to gain its fully duplex capabilities"},
+         {"paper": "2410.00037v1", "page": 17, "quote": "we further leverage the Fisher dataset"}]}]},
+
+    {"id": "q15", "type": "definition", "answerable": true,
+     "question": "What two techniques make up dynamic chunking in H-Net?",
+     "answer": "A routing module that predicts boundaries from a similarity score, and a smoothing module that interpolates representations using the router's outputs.", "accept": ["routing", "smoothing"],
+     "evidence": [{"any_of": [{"paper": "2507.07955v2", "page": 2, "quote": "(i) a routing module which predicts boundaries between adjacent elements through a similarity score (ii) and a smoothing module"}]}]},
+
+    {"id": "q16", "type": "numeric", "answerable": true,
+     "question": "What probability threshold does the H-Net routing module use to place a chunk boundary?",
+     "answer": "0.5: b_t = 1 when p_t >= 0.5.", "accept": ["0\\.5"],
+     "evidence": [{"any_of": [{"paper": "2507.07955v2", "page": 6, "quote": "𝑏𝑡 = 1 {𝑝𝑡 ≥0.5}"}]}]},
+
+    {"id": "q17", "type": "numeric", "answerable": true,
+     "question": "How much data are H-Net's main language models trained on, and from which dataset?",
+     "answer": "A 100B-token subset of FineWeb-Edu.", "accept": ["100\\s*B", "FineWeb"],
+     "evidence": [{"any_of": [{"paper": "2507.07955v2", "page": 11, "quote": "We train all models on the 100B token subset sampled from the FineWeb-Edu dataset"}]}]},
+
+    {"id": "q18", "type": "table", "answerable": true,
+     "question": "What average zero-shot accuracy does the 2-stage H-Net reach at the GPT-3 Large FLOPs-matched scale?",
+     "answer": "55.5.", "accept": ["55\\.5"],
+     "notes": "Table 2 repeats the row name at the XL scale; the first block is GPT-3 Large.",
+     "evidence": [{"any_of": [{"paper": "2507.07955v2", "page": 13, "table": "Table 2", "row": "H-Net (2-stage)", "column": "Average acc ↑", "value": "55.5"}]}]},
+
+    {"id": "q19", "type": "unanswerable", "answerable": false,
+     "question": "What BLEU score does the Transformer reach on English-to-Spanish translation?",
+     "answer": "Not in the papers: the Transformer is evaluated on English-German and English-French only.",
+     "absent": ["Spanish"]},
+
+    {"id": "q20", "type": "unanswerable", "answerable": false,
+     "question": "How much does it cost per hour to run Moshi on a cloud GPU?",
+     "answer": "Not in the papers.",
+     "absent": ["per hour", "cloud"]},
+
+    {"id": "q21", "type": "unanswerable", "answerable": false,
+     "question": "What image classification accuracy does H-Net report?",
+     "answer": "Not in the papers: H-Net is evaluated on language, code, Chinese and DNA, not images.",
+     "notes": "Decoy: 'ImageNet' appears once, only in H-Net's bibliography (not indexed).",
+     "absent": ["image classification"]},
+
+    {"id": "q22", "type": "unanswerable", "answerable": false,
+     "question": "Under which license is the Mimi codec released?",
+     "answer": "Not in the papers.",
+     "absent": ["licen[sc]e"]}
+  ]
+}

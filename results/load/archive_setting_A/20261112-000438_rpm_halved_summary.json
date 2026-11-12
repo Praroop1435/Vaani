@@ -1,0 +1,46 @@
+{
+  "governor_peak_waiting": 1,
+  "limiter": "v2-token-bucket",
+  "pipeline_told": {
+    "RPM": 30,
+    "TPM": 8000,
+    "RPD": 1000
+  },
+  "requests": 16,
+  "scenario": "rpm_halved",
+  "standin": {
+    "Requests": 36,
+    "OK": 34,
+    "Limited429": 0,
+    "Failed500": 0,
+    "Stalled": 2,
+    "Dropped": 0,
+    "PeakInFlight": 1
+  },
+  "standin_config": {
+    "capacity": 3,
+    "content_tok_ms": 3.4746904761904767,
+    "drop_rate": 0.005,
+    "fail_rate": 0.01,
+    "first_base_ms": 546.8234375535217,
+    "first_per_1k_prompt_ms": 154.72342103829388,
+    "first_sigma": 0.47122704460675574,
+    "prompt_overhead": 71,
+    "prompt_ratio": 0.889,
+    "reasoning_tok": 35,
+    "rpd": 1000,
+    "rpd_used_at_start": 0,
+    "rpm": 15,
+    "seed": 1003,
+    "slow_per_extra": 0.3,
+    "stall_ms": 8000,
+    "stall_rate": 0.02,
+    "tpm": 4000
+  },
+  "status": {
+    "ok": 15,
+    "timeout": 1
+  },
+  "wall_s": 452.043554167,
+  "what": "2/min for 8 min; the stand-in halves RPM and TPM (15, 4,000) without telling the pipeline"
+}

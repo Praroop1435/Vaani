@@ -1,0 +1,396 @@
+{
+ "version": "dev-2 (2026-11-12): +3 definition questions",
+ "author": "assistant-drafted from chunk text; tuning set, never scored in the report tables",
+ "how_verified": "each quote checked against data/index/chunks_300.json",
+ "questions": [
+  {
+   "id": "d01",
+   "type": "numeric",
+   "answerable": true,
+   "question": "How many identical layers make up the Transformer encoder?",
+   "answer": "6 identical layers.",
+   "accept": [
+    "\\b6\\b"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "1706.03762v7",
+       "page": 3,
+       "quote": "stack of N = 6 identical layers"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d02",
+   "type": "numeric",
+   "answerable": true,
+   "question": "What label smoothing value was used when training the Transformer?",
+   "answer": "0.1",
+   "accept": [
+    "0\\.1\\b"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "1706.03762v7",
+       "page": 8,
+       "quote": "we employed label smoothing of value"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d03",
+   "type": "numeric",
+   "answerable": true,
+   "question": "Which values of beta1 and beta2 does the Transformer's Adam optimizer use?",
+   "answer": "β1 = 0.9, β2 = 0.98",
+   "accept": [
+    "0\\.9\\b",
+    "0\\.98"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "1706.03762v7",
+       "page": 7,
+       "quote": "We used the Adam optimizer"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d04",
+   "type": "numeric",
+   "answerable": true,
+   "question": "For how many steps and how long were the base Transformer models trained?",
+   "answer": "100,000 steps, 12 hours.",
+   "accept": [
+    "100,?000|100k",
+    "12 hours"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "1706.03762v7",
+       "page": 7,
+       "quote": "We trained the base models for a total of 100,000 steps or 12 hours"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d05",
+   "type": "numeric",
+   "answerable": true,
+   "question": "What beam size does the Transformer use in beam search?",
+   "answer": "4",
+   "accept": [
+    "\\b4\\b"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "1706.03762v7",
+       "page": 8,
+       "quote": "We used beam search with a beam size of 4"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d06",
+   "type": "numeric",
+   "answerable": true,
+   "question": "How many sentences are in the English-French training data used for the Transformer?",
+   "answer": "36M sentences.",
+   "accept": [
+    "36\\s*(M|million)"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "1706.03762v7",
+       "page": 7,
+       "quote": "WMT 2014 English-French dataset consisting of 36M sentences"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d07",
+   "type": "numeric",
+   "answerable": true,
+   "question": "How many hours of audio are in Moshi's unsupervised audio dataset?",
+   "answer": "7 million hours.",
+   "accept": [
+    "7\\s*(million|M)"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2410.00037v1",
+       "page": 17,
+       "quote": "We use a first audio collection of 7 million hours"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d08",
+   "type": "numeric",
+   "answerable": true,
+   "question": "What sample rate is the waveform that Mimi's encoder takes as input?",
+   "answer": "24 kHz.",
+   "accept": [
+    "24\\s*kHz"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2410.00037v1",
+       "page": 10,
+       "quote": "encoder projects a 24kHz waveform"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d09",
+   "type": "numeric",
+   "answerable": true,
+   "question": "How many codebooks does the Mimi codec use in Moshi?",
+   "answer": "8 codebooks.",
+   "accept": [
+    "\\b8\\b"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2410.00037v1",
+       "page": 12,
+       "quote": "with Q = 8 codebooks at a frame rate of 12.5hz"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d10",
+   "type": "numeric",
+   "answerable": true,
+   "question": "Which Whisper model was used to transcribe Moshi's audio training set?",
+   "answer": "large-v3",
+   "accept": [
+    "large-v3"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2410.00037v1",
+       "page": 17,
+       "quote": "using the large-v3 model"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d11",
+   "type": "numeric",
+   "answerable": true,
+   "question": "For how many steps is Moshi fine-tuned on the Fisher dataset stage?",
+   "answer": "10k batches.",
+   "accept": [
+    "10\\s*k\\b|10,?000"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2410.00037v1",
+       "page": 20,
+       "quote": "We then use the Fisher dataset"
+      }
+     ]
+    }
+   ],
+   "notes": "First label said 100k (the post-training stage). The real model answered 10k and was right: Fisher fine-tuning is 10k batches."
+  },
+  {
+   "id": "d12",
+   "type": "numeric",
+   "answerable": true,
+   "question": "Which layers are the primary building blocks of H-Net's encoder and decoder networks?",
+   "answer": "Mamba-2 layers.",
+   "accept": [
+    "Mamba"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2507.07955v2",
+       "page": 5,
+       "quote": "we employ Mamba-2 layers"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d13",
+   "type": "numeric",
+   "answerable": true,
+   "question": "How much does H-Net improve data efficiency on DNA sequences over baselines?",
+   "answer": "Nearly 4x.",
+   "accept": [
+    "4\\s*[×x]|four"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2507.07955v2",
+       "page": 1,
+       "quote": "nearly 4× improvement in data efficiency over baselines"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d14",
+   "type": "numeric",
+   "answerable": true,
+   "question": "Which dataset were the H-Net DNA models trained on?",
+   "answer": "HG38.",
+   "accept": [
+    "HG38"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2507.07955v2",
+       "page": 16,
+       "quote": "Each model was trained on the HG38 dataset"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d15",
+   "type": "numeric",
+   "answerable": true,
+   "question": "Beyond English text, which other kinds of data is H-Net evaluated on?",
+   "answer": "Chinese, code, and DNA.",
+   "accept": [
+    "Chinese",
+    "code",
+    "DNA"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2507.07955v2",
+       "page": 10,
+       "quote": "diverse datasets including Chinese, code, and DNA"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d16",
+   "type": "definition",
+   "answerable": true,
+   "question": "How does the Transformer paper describe an attention function?",
+   "answer": "A mapping from a query and a set of key-value pairs to an output.",
+   "accept": [
+    "query",
+    "key"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "1706.03762v7",
+       "page": 3,
+       "quote": "An attention function can be described as mapping a query and a set of key-value pairs to an output"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d17",
+   "type": "definition",
+   "answerable": true,
+   "question": "What does the Temporal Transformer do in Moshi?",
+   "answer": "It maps the past steps to a temporal context vector.",
+   "accept": [
+    "context"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2410.00037v1",
+       "page": 13,
+       "quote": "the Temporal Transformer maps"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d18",
+   "type": "definition",
+   "answerable": true,
+   "question": "What does the smoothing module do in H-Net?",
+   "answer": "It interpolates representations using the router's outputs.",
+   "accept": [
+    "interpolat"
+   ],
+   "evidence": [
+    {
+     "any_of": [
+      {
+       "paper": "2507.07955v2",
+       "page": 2,
+       "quote": "a smoothing module which interpolates representations"
+      },
+      {
+       "paper": "2507.07955v2",
+       "page": 2,
+       "quote": "a smoothing module for converting discrete chunks into interpolated representations"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+# github.com/Praroop1435/Vaani/cmd/smoke
+warm-up: HTTP 401 in 511ms (unauthenticated, no quota)
+answer cache: off (measured run)
+
+=== q19 (unanswerable): What BLEU score does the Transformer reach on English-to-Spanish translation?
+> The papers do not say. The closest passages are Attention Is All You Need, p.8, Table 2; Attention Is All You Need, p.8, §6.1; Attention Is All You Need, p.8-9, §6.2; Attention Is All You Need, p.7-8, §5.4; Attention Is All You Need, p.1, Abstract; Attention Is All You Need, p.9, Table 3.
+    status=ok grade=refused_correctly citation_ok=true ttft=1920ms total=1920ms tokens=2640 in / 140 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    37ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   342ms retry=    0ms retries=0 first=276ms tok=231/43 
+    step retrieve_rewrite wait=     0ms work=    28ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer BLEU English to Spanish"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.718, 1 part(s)
+    step draft      wait=     0ms work=   863ms retry=    0ms retries=0 first=850ms tok=1234/65 
+    step retrieve_targeted wait=     0ms work=    34ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   616ms retry=    0ms retries=0 first=587ms tok=1175/32 
+
+=== q21 (unanswerable): What image classification accuracy does H-Net report?
+> The papers do not say. The closest passages are H-Net (Dynamic Chunking), p.6, §2.2; H-Net (Dynamic Chunking), p.2, §1; H-Net (Dynamic Chunking), p.4, §2; H-Net (Dynamic Chunking), p.39, §F; H-Net (Dynamic Chunking), p.14, §3.1; H-Net (Dynamic Chunking), p.17, §3.3.
+    status=ok grade=refused_correctly citation_ok=true ttft=2122ms total=2122ms tokens=2043 in / 169 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    34ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   781ms retry=    0ms retries=0 first=696ms tok=225/41 
+    step retrieve_rewrite wait=     0ms work=    29ms retry=    0ms retries=0 first=0ms tok=0/0 query="H-Net image classification accuracy"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.759, 1 part(s)
+    step draft      wait=     0ms work=   817ms retry=    0ms retries=0 first=810ms tok=1061/49 
+    step retrieve_targeted wait=     0ms work=    29ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   433ms retry=    0ms retries=0 first=420ms tok=757/79 
+
+=== q22 (unanswerable): Under which license is the Mimi codec released?
+> The papers do not say. The closest passages are Moshi, p.23, §5.1; Moshi, p.23, Table 4; Moshi, p.23, Table 4; Moshi, p.10-11, §3.3.1; Moshi, p.39, §6.4; Moshi, p.39, §6.4.
+    status=ok grade=refused_correctly citation_ok=true ttft=1781ms total=1781ms tokens=2593 in / 143 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    36ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   561ms retry=    0ms retries=0 first=483ms tok=225/35 
+    step retrieve_rewrite wait=     0ms work=    28ms retry=    0ms retries=0 first=0ms tok=0/0 query="Mimi codec license"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.651, 1 part(s)
+    step draft      wait=     0ms work=   521ms retry=    0ms retries=0 first=514ms tok=1475/31 
+    step retrieve_targeted wait=     0ms work=    31ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   605ms retry=    0ms retries=0 first=580ms tok=893/77 
+
+tokens used: 7728 of 15000 ceiling
+raw traces: results/quality/20261111-234334_traces.jsonl

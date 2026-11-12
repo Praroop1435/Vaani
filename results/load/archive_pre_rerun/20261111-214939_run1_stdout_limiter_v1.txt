@@ -1,0 +1,13 @@
+tee: results/load/run_stdout.txt: No such file or directory
+# github.com/Praroop1435/Vaani/cmd/load
+stand-in fitted from 9 real calls: first token = 547 ms + 155 ms per 1K prompt tokens, x lognormal(sigma 0.47); 3.5 ms per content token; 35 hidden reasoning tokens
+answer cache: off (measured run)
+
+=== steady: 2 questions/min for 8 min (under the ~3/min the 8K TPM allows) (16 requests)
+status map[ok:16] | governor peak queue 1 | stand-in: 40 requests, 40 ok, 0 limited, 0 500s, 0 stalled, 0 cut, peak in flight 1
+
+=== burst: 2/min for 6 min, plus 20 questions within 5 s at minute 2 (32 requests)
+status map[ok:12 rate_limited:20] | governor peak queue 2 | stand-in: 36 requests, 36 ok, 0 limited, 0 500s, 0 stalled, 0 cut, peak in flight 7
+
+
+[killed]

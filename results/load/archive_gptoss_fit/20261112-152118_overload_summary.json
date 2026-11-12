@@ -1,0 +1,48 @@
+{
+  "governor_peak_waiting": 3,
+  "limiter": "v2-token-bucket",
+  "pipeline_told": {
+    "RPM": 30,
+    "TPM": 8000,
+    "RPD": 1000
+  },
+  "requests": 64,
+  "scenario": "overload",
+  "standin": {
+    "Requests": 92,
+    "OK": 88,
+    "Limited429": 1,
+    "Failed500": 0,
+    "Stalled": 2,
+    "Dropped": 0,
+    "PeakInFlight": 2
+  },
+  "standin_config": {
+    "capacity": 3,
+    "content_tok_ms": 3.4746904761904767,
+    "drop_rate": 0.005,
+    "fail_rate": 0.01,
+    "first_base_ms": 546.8234375535217,
+    "first_per_1k_prompt_ms": 154.72342103829388,
+    "first_sigma": 0.47122704460675574,
+    "prompt_overhead": 71,
+    "prompt_ratio": 0.889,
+    "reasoning_tok": 35,
+    "rpd": 1000,
+    "rpd_used_at_start": 0,
+    "rpm": 30,
+    "seed": 1002,
+    "slow_per_extra": 0.3,
+    "stall_ms": 8000,
+    "stall_rate": 0.02,
+    "tpm": 8000
+  },
+  "status": {
+    "error": 1,
+    "ok": 22,
+    "rate_limited": 40,
+    "timeout": 1
+  },
+  "wall_s": 478.7158455,
+  "what": "8 questions/min for 8 min (~3x what 8K TPM allows)"
+}

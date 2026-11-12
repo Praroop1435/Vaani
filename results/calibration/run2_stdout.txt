@@ -1,0 +1,11 @@
+# github.com/Praroop1435/Vaani/cmd/smoke
+warm-up: HTTP 401 in 907ms (unauthenticated, no quota)
+answer cache: off (measured run)
+
+tokens used: 0 of 15000 ceiling
+raw traces: results/calibration/20261111-214432_traces.jsonl
+probe tpm_pair_1             HTTP 200 first=898ms total=904ms tok=5278/19 retry-after= 
+probe tpm_pair_2             HTTP 429 first=-1ms total=294ms tok=0/0 retry-after=20s {"error":{"message":"Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01kfsw8t9texxsrzfcdkern7nf` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5318, Requested 5328. Please try again in 19.845s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing","type":"tokens","code":"rate_limit_exceeded"}}
+
+probe recovery_after_20.5s   HTTP 200 first=318ms total=322ms tok=78/28 retry-after= 
+probe raw: results/calibration/20261111-214432_probe.jsonl

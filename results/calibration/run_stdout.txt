@@ -1,0 +1,48 @@
+# github.com/Praroop1435/Vaani/cmd/smoke
+warm-up: HTTP 401 in 509ms (unauthenticated, no quota)
+answer cache: off (measured run)
+
+=== q09 (numeric): What bitrate does Mimi reach?
+> 1.1 kbps [Moshi, p.23, Table 4]
+    status=ok grade=correct citation_ok=true ttft=1935ms total=1935ms tokens=1707 in / 142 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    27ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   669ms retry=    0ms retries=0 first=622ms tok=222/55 
+    step retrieve_rewrite wait=     0ms work=    26ms retry=    0ms retries=0 first=0ms tok=0/0 query="Mimi audio codec bitrate"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.740, 1 part(s)
+    step draft      wait=     0ms work=  1213ms retry=    0ms retries=0 first=1170ms tok=1485/87 
+
+=== q11 (table): What is the model dimension of the Helium language model?
+> 4096 [Moshi, p.8, Table 1]
+    status=ok grade=correct citation_ok=true ttft=1157ms total=1157ms tokens=2167 in / 87 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    47ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   424ms retry=    0ms retries=0 first=289ms tok=228/43 
+    step retrieve_rewrite wait=     0ms work=    31ms retry=    0ms retries=0 first=0ms tok=0/0 query="Helium language model dimension"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.789, 1 part(s)
+    step draft      wait=     0ms work=   655ms retry=    0ms retries=0 first=624ms tok=1939/44 
+
+=== q16 (numeric): What probability threshold does the H-Net routing module use to place a chunk boundary?
+> The routing module places a chunk boundary when the boundary probability pₜ is at least 0.5 [H-Net (Dynamic Chunking), p.6, §2.2.1].
+    status=ok grade=correct citation_ok=true ttft=1687ms total=1687ms tokens=1632 in / 126 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    92ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   813ms retry=    0ms retries=0 first=667ms tok=232/52 
+    step retrieve_rewrite wait=     0ms work=    38ms retry=    0ms retries=0 first=0ms tok=0/0 query="H-Net routing module chunk boundary probability threshold"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.738, 1 part(s)
+    step draft      wait=     0ms work=   743ms retry=    0ms retries=0 first=683ms tok=1400/74 
+
+=== q20 (unanswerable): How much does it cost per hour to run Moshi on a cloud GPU?
+> The papers do not say. The closest passages are Moshi, p.33, Table 11; Moshi, p.33, Table 11; Moshi, p.33, §5.8; Moshi, p.8, Table 1; Moshi, p.32, §5.8; Moshi, p.34, §5.8.
+    status=ok grade=refused_correctly citation_ok=true ttft=3151ms total=3151ms tokens=2747 in / 140 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    84ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   561ms retry=    0ms retries=0 first=484ms tok=232/70 
+    step retrieve_rewrite wait=     0ms work=    30ms retry=    0ms retries=0 first=0ms tok=0/0 query="Moshi cloud GPU hourly cost"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.592, 1 part(s)
+    step draft      wait=     0ms work=   622ms retry=    0ms retries=0 first=611ms tok=1557/31 
+    step retrieve_targeted wait=     0ms work=    38ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=  1815ms retry=    0ms retries=0 first=1786ms tok=958/39 
+
+tokens used: 8748 of 22000 ceiling
+raw traces: results/calibration/20261111-213734_traces.jsonl
+probe tpm_pair_1             HTTP 200 first=367ms total=367ms tok=78/28 retry-after= 
+probe tpm_pair_2             HTTP 200 first=516ms total=521ms tok=78/28 retry-after= 
+probe recovery_after_10s     HTTP 200 first=460ms total=460ms tok=78/28 retry-after= 
+probe raw: results/calibration/20261111-213734_probe.jsonl

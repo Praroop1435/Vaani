@@ -17,3 +17,8 @@
 
 # LaTeX sources fetched from arXiv by ingest (for tables)
 /data/latex/
+
+# LaTeX build files (report.pdf is committed)
+/Docs/report/*.aux
+/Docs/report/*.log
+/Docs/report/*.out

@@ -2,7 +2,10 @@ module github.com/Praroop1435/Vaani
 
 go 1.27.3
 
-require github.com/knights-analytics/hugot v0.8.5
+require (
+	github.com/knights-analytics/hugot v0.8.5
+	golang.org/x/text v0.43.0
+)
 
 require (
 	github.com/eliben/go-sentencepiece v0.7.0 // indirect
@@ -23,7 +26,6 @@ require (
 	golang.org/x/image v0.47.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
 	golang.org/x/sys v0.49.0 // indirect
-	golang.org/x/text v0.43.0 // indirect
 	google.golang.org/protobuf v1.36.12 // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect
 )

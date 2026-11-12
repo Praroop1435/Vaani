@@ -1,0 +1,105 @@
+warm-up: HTTP 401 in 519ms (unauthenticated, no quota)
+answer cache: off (measured run)
+
+=== q01 (numeric): How many parallel attention heads does the base Transformer use?
+> 8 [Attention Is All You Need, p.4-5, §3.2.2]
+    status=ok grade=correct citation_ok=true ttft=2441ms total=2441ms tokens=1840 in / 103 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    38ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   331ms retry=    0ms retries=0 first=270ms tok=227/40 
+    step retrieve_rerank wait=     0ms work=  1529ms retry=    0ms retries=0 first=0ms tok=0/0 query="base Transformer parallel attention heads"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.673, 1 part(s)
+    step draft      wait=     0ms work=   544ms retry=    0ms retries=0 first=521ms tok=1613/63 
+
+=== q02 (numeric): What dropout rate does the base Transformer model use?
+> The papers do not say. The closest passages are Attention Is All You Need, p.8, §5.4; Attention Is All You Need, p.8, §5.4; Attention Is All You Need, p.8, §6.1; Attention Is All You Need, p.8-9, §6.2; Attention Is All You Need, p.9, Table 3; Attention Is All You Need, p.9, Table 3; Attention Is All You Need, p.9-10, §6.3; Attention Is All You Need, p.8, Table 2.
+    status=ok grade=refused_wrongly citation_ok=false ttft=3430ms total=3430ms tokens=3521 in / 126 out retries=0 dropped=1 degraded=[]
+    step retrieve   wait=     0ms work=    36ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   478ms retry=    0ms retries=0 first=427ms tok=226/38 
+    step retrieve_rerank wait=     0ms work=  1103ms retry=    0ms retries=0 first=0ms tok=0/0 query="base Transformer dropout rate"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.672, 1 part(s)
+    step draft      wait=     0ms work=   475ms retry=    0ms retries=0 first=440ms tok=2291/49 
+    step retrieve_targeted wait=     0ms work=  1021ms retry=    0ms retries=0 first=0ms tok=0/0 missing P1, added 2 chunk(s)
+    step draft_targeted wait=     0ms work=   317ms retry=    0ms retries=0 first=240ms tok=1004/39 
+    DROPPED: no citation: [P1] 0.1
+    cite: evidence item 1 not cited
+
+=== q03 (numeric): How many warmup steps does the Transformer's learning-rate schedule use?
+> 4000 warmup steps are used in the Transformer's learning-rate schedule. [Attention Is All You Need, p.7, §5.3]
+    status=ok grade=correct citation_ok=true ttft=2854ms total=2854ms tokens=1894 in / 110 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    42ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   540ms retry=    0ms retries=0 first=429ms tok=230/43 
+    step retrieve_rerank wait=     0ms work=  1378ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer warmup steps learning rate schedule"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.733, 1 part(s)
+    step draft      wait=     0ms work=   894ms retry=    0ms retries=0 first=887ms tok=1664/67 
+
+=== q04 (numeric): What hardware were the Transformer models trained on?
+> The Transformer models were trained on a machine equipped with 8 NVIDIA P100 GPUs. [Attention Is All You Need, p.7, §5.2; Attention Is All You Need, p.2, §1]
+    status=ok grade=correct citation_ok=true ttft=2425ms total=2425ms tokens=1763 in / 120 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    32ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   507ms retry=    0ms retries=0 first=474ms tok=225/44 
+    step retrieve_rerank wait=     0ms work=  1255ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer training hardware"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.662, 1 part(s)
+    step draft      wait=     0ms work=   633ms retry=    0ms retries=0 first=573ms tok=1538/76 
+
+=== q05 (table): What BLEU score does the Transformer (big) model reach on WMT 2014 English-to-German?
+> 28.4 BLEU [Attention Is All You Need, p.8, §6.1; Attention Is All You Need, p.8, Table 2; Attention Is All You Need, p.1, Abstract]
+    status=ok grade=correct citation_ok=true ttft=2690ms total=2690ms tokens=2329 in / 124 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    38ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   526ms retry=    0ms retries=0 first=499ms tok=239/56 
+    step retrieve_rerank wait=     0ms work=  1142ms retry=    0ms retries=0 first=0ms tok=0/0 query="Transformer big BLEU WMT 2014 English German"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.797, 1 part(s)
+    step draft      wait=     0ms work=   985ms retry=    0ms retries=0 first=900ms tok=2090/68 
+
+=== q06 (table): How many parameters does the big Transformer have in the model-variations table?
+> 213 × 10^6 parameters [Attention Is All You Need, p.9, Table 3]
+    status=ok grade=correct citation_ok=true ttft=2787ms total=2787ms tokens=2786 in / 124 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    36ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   640ms retry=    0ms retries=0 first=490ms tok=232/67 
+    step retrieve_rerank wait=     0ms work=  1653ms retry=    0ms retries=0 first=0ms tok=0/0 query="big Transformer parameter count model-variations table"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.696, 1 part(s)
+    step draft      wait=     0ms work=   459ms retry=    0ms retries=0 first=417ms tok=2554/57 
+
+=== q07 (multi): How many sentence pairs are in the English-German training data, and what BLEU does the base Transformer reach on English-to-German?
+> about 4.5 million sentence pairs [Attention Is All You Need, p.7, §5.1]. 27.3 BLEU on English‑to‑German [Attention Is All You Need, p.8, Table 2].
+    status=ok grade=correct citation_ok=true ttft=2767ms total=2803ms tokens=2340 in / 267 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    81ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   668ms retry=    0ms retries=0 first=548ms tok=244/103 
+    step retrieve_rerank wait=     0ms work=  1389ms retry=    0ms retries=0 first=0ms tok=0/0 query="English-German training sentence pairs and base Transformer BLEU English-to-German"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.745, 2 part(s)
+    step draft      wait=     0ms work=   665ms retry=    0ms retries=0 first=593ms tok=2096/164 
+
+=== q08 (numeric): What frame rate does the Mimi codec run at?
+> 12.5 Hz [Moshi, p.23, Table 4]
+    status=ok grade=correct citation_ok=true ttft=2826ms total=2826ms tokens=2550 in / 97 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    25ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   323ms retry=    0ms retries=0 first=275ms tok=226/35 
+    step retrieve_rerank wait=     0ms work=  1736ms retry=    0ms retries=0 first=0ms tok=0/0 query="Mimi codec frame rate"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.730, 1 part(s)
+    step draft      wait=     0ms work=   742ms retry=    0ms retries=0 first=706ms tok=2324/62 
+
+=== q10 (numeric): What latency does Moshi achieve?
+> Moshi achieves a theoretical inference latency of 160 ms and a practical latency of about 200 ms [Moshi, p.1-2, Abstract; Moshi, p.26, §5.3].
+    status=ok grade=correct citation_ok=true ttft=2336ms total=2336ms tokens=1861 in / 116 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    19ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   376ms retry=    0ms retries=0 first=295ms tok=223/42 
+    step retrieve_rerank wait=     0ms work=  1467ms retry=    0ms retries=0 first=0ms tok=0/0 query="Moshi latency"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.673, 1 part(s)
+    step draft      wait=     0ms work=   473ms retry=    0ms retries=0 first=402ms tok=1638/74 
+
+=== q12 (numeric): What GPUs were the Moshi models trained on?
+> H100 GPUs [Moshi, p.20, §4.4]. H100 GPUs [Moshi, p.20, §4.4].
+    status=ok grade=correct citation_ok=true ttft=3062ms total=3080ms tokens=2493 in / 146 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    31ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   556ms retry=    0ms retries=0 first=442ms tok=226/70 
+    step retrieve_rerank wait=     0ms work=  1985ms retry=    0ms retries=0 first=0ms tok=0/0 query="Moshi training hardware GPUs"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.630, 2 part(s)
+    step draft      wait=     0ms work=   509ms retry=    0ms retries=0 first=461ms tok=2267/76 
+
+=== q13 (definition): What is Inner Monologue in Moshi?
+> Inner Monologue is a training and inference setup for audio language models that jointly models textual and audio modalities on the system side by inserting a text token stream as a prefix to the generation of semantic tokens, thereby improving factuality and linguistic quality of generated speech [Moshi, p.3, §1; Moshi, p.15-16, §3.4.4].
+    status=ok grade=correct citation_ok=false ttft=2516ms total=2516ms tokens=1817 in / 154 out retries=0 dropped=0 degraded=[]
+    step retrieve   wait=     0ms work=    30ms retry=    0ms retries=0 first=0ms tok=0/0 query=question
+    step understand wait=     0ms work=   664ms retry=    0ms retries=0 first=530ms tok=225/66 
+    step retrieve_rerank wait=     0ms work=  1281ms retry=    0ms retries=0 first=0ms tok=0/0 query="Inner Monologue Moshi"
+    step decide     wait=     0ms work=     0ms retry=    0ms retries=0 first=0ms tok=0/0 draft: best score 0.635, 1 part(s)
+    step draft      wait=     0ms work=   541ms retry=    0ms retries=0 first=390ms tok=1592/88 

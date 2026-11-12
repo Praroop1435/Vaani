@@ -1,0 +1,55 @@
+{
+  "version": "2026-11-11",
+  "author": "Claude draft; Praroop to review. 'same' = the cached answer to 'cached' fully answers 'asked'. 'different' = it would be wrong or off-target.",
+  "pairs": [
+    {"cached": "How many parallel attention heads does the base Transformer use?", "asked": "How many parallel attention heads does the base Transformer use?", "label": "same", "kind": "exact"},
+    {"cached": "How many parallel attention heads does the base Transformer use?", "asked": "how many parallel attention heads does the base transformer use", "label": "same", "kind": "exact"},
+    {"cached": "How many parallel attention heads does the base Transformer use?", "asked": "In the base Transformer, how many parallel attention heads are used?", "label": "same", "kind": "paraphrase"},
+    {"cached": "How many parallel attention heads does the base Transformer use?", "asked": "How many attention heads does the base Transformer have?", "label": "same", "kind": "paraphrase"},
+    {"cached": "How many parallel attention heads does the base Transformer use?", "asked": "How many parallel attention heads does the big Transformer use?", "label": "different", "kind": "modifier"},
+    {"cached": "How many parallel attention heads does the base Transformer use?", "asked": "How many layers does the base Transformer encoder use?", "label": "different", "kind": "attribute"},
+
+    {"cached": "What dropout rate does the base Transformer model use?", "asked": "Which dropout rate is used in the base Transformer?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What dropout rate does the base Transformer model use?", "asked": "What is the dropout rate of the base Transformer model?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What dropout rate does the base Transformer model use?", "asked": "What dropout rate does the big Transformer model use?", "label": "different", "kind": "modifier"},
+    {"cached": "What dropout rate does the base Transformer model use?", "asked": "What label smoothing value does the base Transformer model use?", "label": "different", "kind": "attribute"},
+
+    {"cached": "How many warmup steps does the Transformer's learning-rate schedule use?", "asked": "How many warmup steps are used in the Transformer learning rate schedule?", "label": "same", "kind": "paraphrase"},
+    {"cached": "How many warmup steps does the Transformer's learning-rate schedule use?", "asked": "How many training steps does the base Transformer use?", "label": "different", "kind": "attribute"},
+
+    {"cached": "What hardware were the Transformer models trained on?", "asked": "On what hardware were the Transformer models trained?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What hardware were the Transformer models trained on?", "asked": "What hardware were the Moshi models trained on?", "label": "different", "kind": "entity"},
+
+    {"cached": "What BLEU score does the Transformer (big) model reach on WMT 2014 English-to-German?", "asked": "What BLEU score does the big Transformer get on WMT 2014 English-to-German?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What BLEU score does the Transformer (big) model reach on WMT 2014 English-to-German?", "asked": "What BLEU score does the Transformer (big) model reach on WMT 2014 English-to-French?", "label": "different", "kind": "entity"},
+    {"cached": "What BLEU score does the Transformer (big) model reach on WMT 2014 English-to-German?", "asked": "What BLEU score does the base Transformer model reach on WMT 2014 English-to-German?", "label": "different", "kind": "modifier"},
+    {"cached": "What BLEU score does the Transformer (big) model reach on WMT 2014 English-to-German?", "asked": "What BLEU score does the Transformer (big) model reach on WMT 2014 German-to-English?", "label": "different", "kind": "order"},
+    {"cached": "What is the input to the decoder in the Transformer?", "asked": "What is the decoder an input to in the Transformer?", "label": "different", "kind": "order"},
+
+    {"cached": "What frame rate does the Mimi codec run at?", "asked": "At what frame rate does the Mimi codec operate?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What frame rate does the Mimi codec run at?", "asked": "What is the frame rate of Mimi?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What frame rate does the Mimi codec run at?", "asked": "What sample rate does the Mimi codec take as input?", "label": "different", "kind": "attribute"},
+
+    {"cached": "What bitrate does Mimi reach?", "asked": "What is the bitrate of Mimi?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What bitrate does Mimi reach?", "asked": "What frame rate does Mimi reach?", "label": "different", "kind": "attribute"},
+
+    {"cached": "What latency does Moshi achieve?", "asked": "What is the latency of Moshi?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What latency does Moshi achieve?", "asked": "What latency does Mimi achieve?", "label": "different", "kind": "entity"},
+
+    {"cached": "What is the model dimension of the Helium language model?", "asked": "What model dimension does Helium use?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What is the model dimension of the Helium language model?", "asked": "How many layers does the Helium language model have?", "label": "different", "kind": "attribute"},
+
+    {"cached": "What GPUs were the Moshi models trained on?", "asked": "Which GPUs were used to train Moshi?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What GPUs were the Moshi models trained on?", "asked": "What GPUs were the Transformer models trained on?", "label": "different", "kind": "entity"},
+
+    {"cached": "What is Inner Monologue in Moshi?", "asked": "What does Inner Monologue mean in Moshi?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What is Inner Monologue in Moshi?", "asked": "What is the Depth Transformer in Moshi?", "label": "different", "kind": "entity"},
+
+    {"cached": "What probability threshold does the H-Net routing module use to place a chunk boundary?", "asked": "What boundary probability threshold does H-Net's routing module use?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What probability threshold does the H-Net routing module use to place a chunk boundary?", "asked": "What compression ratio does the H-Net routing module target?", "label": "different", "kind": "attribute"},
+
+    {"cached": "What average zero-shot accuracy does the 2-stage H-Net reach at the GPT-3 Large FLOPs-matched scale?", "asked": "At the GPT-3 Large FLOPs-matched scale, what average zero-shot accuracy does the 2-stage H-Net reach?", "label": "same", "kind": "paraphrase"},
+    {"cached": "What average zero-shot accuracy does the 2-stage H-Net reach at the GPT-3 Large FLOPs-matched scale?", "asked": "What average zero-shot accuracy does the 1-stage H-Net reach at the GPT-3 Large FLOPs-matched scale?", "label": "different", "kind": "number"},
+    {"cached": "What average zero-shot accuracy does the 2-stage H-Net reach at the GPT-3 Large FLOPs-matched scale?", "asked": "What average zero-shot accuracy does the 2-stage H-Net reach at the GPT-3 XL FLOPs-matched scale?", "label": "different", "kind": "entity"}
+  ]
+}

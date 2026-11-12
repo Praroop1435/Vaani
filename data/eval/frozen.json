@@ -1,0 +1,14 @@
+{
+  "frozen_at": "2026-11-11",
+  "benchmark_sha256": "8f5e46e4c9f0c442339d34342fa2aaa1c2ed8f2cf0853e35cac4418b074637ff",
+  "note": "Measured runs use only these questions. Any edit to benchmark.json breaks test/frozen_test.go on purpose: re-freezing is a decision, not a side effect.",
+  "quality": ["q01", "q02", "q03", "q04", "q05", "q06", "q07", "q08", "q10", "q12", "q13", "q14", "q15", "q17", "q18"],
+  "unanswerable": ["q19", "q21", "q22"],
+  "excluded": [
+    {"id": "q09", "reason": "redundant evidence: every chunk that answers it (c029, t005) also answers q08"},
+    {"id": "q11", "reason": "redundant evidence: its only answering chunk (Table 1, t000) also answers q14"},
+    {"id": "q16", "reason": "the answer is a pdftotext formula artifact ('𝑏𝑡 = 1 {𝑝𝑡 ≥0.5}'), not reliably gradable as text"},
+    {"id": "q20", "reason": "least library-like unanswerable (best BGE score 0.592 vs 0.613-0.718): weakest near-miss"}
+  ],
+  "rule": "Chosen without looking at answer grades. All 4 questions A currently gets wrong (q01, q02, q12, q17) are kept; the 3 answerable ones dropped currently pass, so the freeze can only lower A's score."
+}

@@ -1,0 +1,6 @@
+stand-in fitted from 9 real calls: first token = 547 ms + 155 ms per 1K prompt tokens, x lognormal(sigma 0.47); 3.5 ms per content token; 35 hidden reasoning tokens
+answer cache: off (measured run)
+A: 300 tok, k=4: map[correct:11 refused_correctly:3 refused_wrongly:4]
+H10: BGE top-10 + BM25 top-10, RRF -> k=4: map[correct:11 refused_correctly:3 refused_wrongly:3 wrong:1]
+H15: BGE top-15 + BM25 top-15, RRF -> k=4: map[correct:10 refused_correctly:3 refused_wrongly:4 wrong:1]
+R: paper scope, BGE+BM25 top-20 with paper/section prefix, cross-encoder re-rank, k=6: map[correct:13 refused_correctly:3 refused_wrongly:2]

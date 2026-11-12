@@ -1,0 +1,113 @@
+\documentclass[10pt]{extarticle}
+\usepackage[a4paper,margin=1.4cm,top=1.3cm,bottom=1.3cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{7pt}{1.5pt}
+\setlist{nosep,leftmargin=1.1em}
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.1}
+\newcommand{\tcap}[1]{\par\vspace{4pt}{\small\bfseries #1}\par\vspace{2pt}}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\pagestyle{empty}
+
+\begin{document}
+
+{\large\bfseries The Relay}\hfill{\small Praroop Anand \textperiodcentered{} every number recomputed from \code{results/results.csv} by \code{go run ./cmd/tables}}
+\vspace{-2pt}
+
+\section*{1. What I built and why}
+A Go service on Groq's free tier (\code{qwen/qwen3.8-27b}) that answers only from the three papers, cites every sentence, and refuses rather than guess. Off-topic questions are refused with no model call; otherwise the model splits the question, then drafts, and a sentence is shown only if its cited passage holds every number in it. \textbf{The decision that shaped it:} tokens per minute are the scarce resource. Groq charges prompt + maximum reply up front against an 8,000-token bucket, so replies are capped and our own token-bucket limiter sits in front of Groq.
+
+\section*{2. The real service and my stand-in}
+34 calibration calls ($\le$3 a minute, on questions kept out of the scored set), including a deliberate probe that forced a real 429. Every header fits a bucket refilling at 133.3 tokens/s.
+\tcap{Table 1: Limits found in the real service}
+{\footnotesize\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}Xl@{}}\toprule
+Limit & Value found & How found & Confidence\\\midrule
+Requests per minute & 30 & Groq docs; never reached & medium\\
+Tokens per minute & 8,000, a bucket refilling at 133.3 tokens/s (qwen: 130.0) & \code{x-ratelimit} headers, 15 responses (qwen: 41) & high\\
+Requests per day & 1,000, one back every 86.4\,s & \code{reset-requests} per request & high\\
+Tokens per day & 200,000 & Groq docs; never reached & low\\
+Requests in flight at once & $\ge$2; more not tested & probe rows & low\\
+What it returns at a limit & HTTP 429, \code{retry-after: 20}, ``try again in 19.845s''; not charged & probe (gpt-oss only) & high (n=1)\\
+Time until it recovers & 21,405\,ms & probe rows & high (n=1)\\\bottomrule
+\end{tabularx}}\par\vspace{3pt}
+\textbf{Stand-in:} a streaming server with Groq's limits and 429 wording. \emph{Calibrated} from 35 real qwen calls: first token $=(427+128\text{ per 1K prompt tokens})$\,ms $\times$ lognormal($\sigma$ 0.31). \emph{Guessed:} 1\% errors, 2\% stalls, slowdown beyond 3 in flight. \emph{Differs most:} its model never errs, so its quality is an upper bound.
+
+\section*{3. Results}
+Load ran on the stand-in, quality on real Groq; nearest-rank percentiles over successful requests. \textbf{Unguessable number:} in the burst the queue was our own CPU re-ranker, not Groq (8,572\,ms per question vs 1,813\,ms at steady load). Quality: 13/15 correct, 0 wrong, 3/3 refused (Table 3).
+\tcap{Table 2a: Latency, one row per load scenario (stand-in, retrieval R)}
+{\footnotesize\begin{tabularx}{\linewidth}{@{}ll*{3}{>{\raggedleft\arraybackslash}X}*{2}{>{\raggedleft\arraybackslash}p{3.5cm}}@{}}\toprule
+Scenario & Real or stand-in & Requests & Duration (s) & Offered /min & First token p50 / p95 / p99 (ms) & Total p50 / p95 / p99 (ms)\\\midrule
+Steady & stand-in & 16 & 454 & 2.0 & 3745 / 12798 / 12798 & 3779 / 12798 / 12798\\
+Burst (+20 in 5\,s) & stand-in & 32 & 334 & 5.6 & 4167 / 11545 / 11545 & 4167 / 11545 / 11545\\
+Sustained overload & stand-in & 64 & 478 & 8.0 & 12762 / 18652 / 18991 & 12762 / 18693 / 18991\\
+Per-minute limit halved & stand-in & 16 & 466 & 2.0 & 10463 / 19675 / 19675 & 10463 / 19675 / 19675\\
+Daily budget exhausted & stand-in & 16 & 227 & 4.0 & 3161 / 3384 / 3384 & 3161 / 3384 / 3384\\\bottomrule
+\end{tabularx}}\par\vspace{3pt}
+\tcap{Table 2b: Outcomes, same rows (cost at Groq's paid price; free tier \$0)}
+{\footnotesize\begin{tabularx}{\linewidth}{@{}l*{2}{>{\raggedleft\arraybackslash}X}>{\raggedleft\arraybackslash}p{2.5cm}*{4}{>{\raggedleft\arraybackslash}X}@{}}\toprule
+Scenario & Succeeded \% & Rate-limited \% & Timed out or given up \% & Retries / request & Peak queue & Tokens / answer & Cost / 1,000 answers\\\midrule
+Steady & 100.0 & 0.0 & 0.0 & 0.06 & 1 & 2407 & \$0.49\\
+Burst & 34.4 & 62.5 & 0.0 (+3.1 error) & 0.12 & 21 & 3206 & \$0.74\\
+Sustained overload & 34.4 & 62.5 & 1.6 (+1.6 error) & 0.03 & 3 & 2770 & \$0.66\\
+Per-minute limit halved & 75.0 & 18.8 & 0.0 (+6.2 error) & 0.12 & 1 & 2404 & \$0.51\\
+Daily budget exhausted & 25.0 & 75.0 & 0.0 & 0.00 & 1 & 1942 & \$0.36\\\bottomrule
+\end{tabularx}}\par\vspace{3pt}
+
+\section*{4. Where the time goes}
+Slowest real answer (q18): 6,280\,ms, all \emph{working} (0 waiting, 0 retrying), all \emph{before} the first token. Re-ranking twice took 3,577\,ms (57\%); the first draft's sentence was dropped and redrafted. Source: per-step trace in \code{results/quality/}.
+
+\section*{5. When a limit is hit}
+\textbf{Per minute:} requests queue in order; one that would miss the 20\,s deadline is \emph{dropped} and gets the passages-only reply. The extra round is skipped (\emph{weaker answer}) when it can't fit. \textbf{Per day:} below 100 requests left, everyone gets a weaker one-call answer; at zero, a reply with no model call.
+
+\clearpage
+\section*{Retrieval: quality versus cost}
+\tcap{Table 3: Retrieval settings (18 questions: 15 answerable, 3 not)}
+{\footnotesize\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.75cm}*{5}{>{\raggedleft\arraybackslash}p{1.08cm}}*{2}{>{\raggedleft\arraybackslash}p{1.75cm}}@{}}\toprule
+Setting (piece size, pieces fetched, re-rank) & Model & Asked & Correct \& cited \% & Wrong \% & Refused right \% & Tok / answer & First token p50 / p95 (ms) & Total p50 / p95 (ms)\\\midrule
+A: 300 tok, 4, no re-rank & real gpt-oss-120b & 18 & 50.0 & 11.1 & 16.7 & 2378 & 1546 / 4956 & 1546 / 5409\\
+R: 300 tok, 6, paper scope, BGE/BM25 top-20, cross-encoder & real gpt-oss-120b & 18 & 61.1 & 16.7 & 16.7 & 2852 & 2854 / 5784 & 2854 / 6537\\
+\textbf{R} (chosen) & \textbf{real qwen3.8-27b} & 18 & \textbf{72.2} & \textbf{0.0} & 16.7 & 2987 & 2979 / 6280 & 2979 / 6280\\
+A: 300 tok, 4, no re-rank & stand-in (oracle) & 18 & 61.1 & 0.0 & 16.7 & 1903 & 1816 / 3989 & 1884 / 3989\\
+H10: 300 tok, 4, BGE/BM25 top-10 fused (RRF) & stand-in (oracle) & 18 & 61.1 & 5.6 & 16.7 & 1921 & 1753 / 2932 & 1754 / 2932\\
+H15: 300 tok, 4, BGE/BM25 top-15 fused (RRF) & stand-in (oracle) & 18 & 55.6 & 5.6 & 16.7 & 1904 & 1899 / 3806 & 1899 / 3806\\
+R & stand-in (oracle) & 18 & 72.2 & 0.0 & 16.7 & 2215 & 3650 / 7186 & 3650 / 7186\\\bottomrule
+\end{tabularx}}\par\vspace{3pt}
+R finds the evidence for 16 of 18 questions (A: 12). \textbf{Chosen: R with qwen}, the only combination with no wrong answers, at $\sim$600 more tokens and $\sim$1.8\,s per answer. Near a limit retrieval stays (it costs no tokens); model calls are cut.
+
+\section*{How this library will mislead a naive retriever}
+\begin{enumerate}
+\item \textbf{Common words win.} ``How many tokens was Helium pretrained on?'' returns ``4.2M tokens per step'', not ``2.1T''.
+\item \textbf{No shared rare word.} ``How much data are H-Net's models trained on?'' never matches ``100B FineWeb-Edu''.
+\item \textbf{Formulas break in PDF text.} ``h = 8'' (attention heads) ranked 27th under A.
+\end{enumerate}
+
+\section*{6. Retries}
+Up to two retries, only if the deadline fits: on 5xx, stalls (no first token in 6\,s) and per-minute 429s; never on a daily 429. \textbf{Made it worse:} in the burst, two retries spent 9\,s on more 429s, then failed at 12.2\,s; no retry would have given the passages-only reply in $\sim$3\,s.
+
+\section*{7. What the person sees}
+Within $\sim$2\,s, no model call (exact text tested):
+{\small\itshape ``I can't write an answer right now: today's model budget (1000 requests/day) is used up. It refills gradually, about one request every 1m26s: the next request can run in about 1m26s, and the full daily quota is back tomorrow at 15:00. The passages most likely to answer this are: \dots''}
+
+\section*{8. What I'm unsure about, what I left out, what I learned}
+\textbf{Least certain:} that a real citation holding every number means a right answer. gpt-oss broke it (``H100 GPUs [Moshi]'' for a Transformer question); if it fails, the system sends a cited wrong answer. I also chose R and qwen after seeing the scored run. \textbf{Not built:} real-Groq load tests (against its terms) and a vector database (376 chunks need none). \textbf{New to me:} a rate limit is a bucket, not a window: a refused call waits only until the bucket covers it (19.8\,s), not a full minute.
+
+\section*{Your feedback on Vaani}
+\textcolor{red}{[Praroop: what stood out, what confused me, one thing I would change.]}
+
+\section*{How I worked with the assistant}
+Full conversation: \code{conversation/main\_session\_export.zip}. \textbf{Prompts that mattered:} (1) fix the limiter and replay the real 429 as a test; (2) rerun all five scenarios, since 0.00 retries everywhere would not survive a reviewer; (3) aim for 90\% and try a newer model, which took us from 9 to 13 of 15 correct. \textbf{It got wrong:} every scenario shared one seed, so no fault fired; I caught it from the 0.00 retries. \textbf{I overruled it:} it was ready to write up 9 of 15; I pushed on. \textbf{Distinctly mine:} the call budget, the frozen question set, and every number recomputable from \code{results.csv}.
+
+\end{document}
